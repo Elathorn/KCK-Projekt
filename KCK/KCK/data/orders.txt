@@ -1,6 +1,6 @@
-idz
-wez
-przenies
-przewies
-jedz
-rusz
+idz;go
+wez;go
+przenies;go
+przewies;go
+jedz;go
+rusz;go

@@ -8,11 +8,11 @@ using namespace std;
 NaturalInterpreter::NaturalInterpreter()
 {
 	//wczytywanie list
-	_ordersList = IOManager::loadListFromFile("orders.txt");
-	_possitiveResponsesList = IOManager::loadListFromFile("affirmative.txt");
-	_shelvesList = IOManager::loadListFromFile("shelves.txt");
-	_movableObjectsList = IOManager::loadListFromFile("movableObjects.txt");
 	//wczytywanie map
+	_ordersList = IOManager::loadMapFromFile("orders.txt");
+	_possitiveResponsesList = IOManager::loadMapFromFile("affirmative.txt");
+	_shelvesList = IOManager::loadMapFromFile("shelves.txt");
+	_movableObjectsList = IOManager::loadMapFromFile("movableObjects.txt");
 	_adjToShelvesMap = IOManager::loadMapFromFile("adjectivesToShelves.txt");
 	_adjToMovableObjectsMap = IOManager::loadMapFromFile("adjectivesToMovableObjects.txt");
 
@@ -22,11 +22,11 @@ NaturalInterpreter::NaturalInterpreter()
 NaturalInterpreter::~NaturalInterpreter()
 {
 	//usuwanie list
+	//usuwanie map
 	delete _ordersList;
 	delete _possitiveResponsesList;
 	delete _shelvesList;
 	delete _movableObjectsList;
-	//usuwanie map
 	delete _adjToShelvesMap;
 	delete _adjToMovableObjectsMap;
 }

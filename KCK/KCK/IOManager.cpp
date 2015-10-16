@@ -33,7 +33,7 @@ map<string, string>* IOManager::loadMapFromFile(string fileName)
 		while (getline(in, word, WORD_SEPARATOR)) //wczytujemy wszystkie elementy s³ownika, najpierw s³owo
 		{
 			getline(in, key, WORD_SEPARATOR); //nastêpnie klucz
-			inputMap->insert(key, word);
+			inputMap->insert({ key, word });
 		}
 		return inputMap;
 	}

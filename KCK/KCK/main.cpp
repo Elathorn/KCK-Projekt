@@ -17,16 +17,12 @@ int main()
 
 
 	//sandbox 
-	list<string>* tempList = new list<string>;
-	tempList = IOManager::loadListFromFile("test.txt");
-	for (list<string>::const_iterator i = tempList->begin(); i != tempList->end(); i++)
+	map<string, string>* myMap;
+	myMap = IOManager::loadMapFromFile("test.txt");
+	for (auto elem : *myMap)
 	{
-		cout << *i;
+		std::cout << elem.first << " " << elem.second << "\n";
 	}
-
-	tempList = IOManager::loadListFromFile("tes2t.txt");
-
-	tempList = IOManager::loadListFromFile("t22est.txt");
 	getchar();
 	//end of sandbox
 

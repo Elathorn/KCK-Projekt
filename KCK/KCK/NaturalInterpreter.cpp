@@ -18,4 +18,5 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 	int position = str.find("Wez");
 	cout << str.substr(position);
 	getchar();
+	//TEST DRUGI
 }

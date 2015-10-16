@@ -1,5 +1,6 @@
 #pragma once
 #include "IOManager.h"
+#include <vector>
 
 using namespace std;
 
@@ -9,6 +10,7 @@ public:
 	NaturalInterpreter();
 	~NaturalInterpreter();
 	int recognizeOrder(string humanInput);
+	vector<string>* tokenizer(string input, char separator);
 private:
 
 	list<string>* _ordersList; //lista wykrywanych rozkazów

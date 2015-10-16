@@ -18,11 +18,11 @@ int main()
 
 	//sandbox 
 	NaturalInterpreter ni;
-	ni.recognizeOrder("");
+	cout << ni.recognizeOrder("Wez czerwone pudlo");
 
 	getchar();
 	//end of sandbox
 
-	return 0; //commit 22:31
+	return 0; 
 }
 

@@ -9,6 +9,7 @@ class NaturalInterpreter //interpretacja jêzyka naturalnego
 public:
 	NaturalInterpreter();
 	~NaturalInterpreter();
+	int recognizeOrder(string humanInput);
 private:
 	list<string> _ordersList;
 

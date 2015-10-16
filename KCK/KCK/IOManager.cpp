@@ -10,8 +10,10 @@ list<string>* IOManager::loadListFromFile(string fileName)
 	{
 		list<string>* inputList = new list<string>;
 		string tmp;
-		while (getline(in, tmp, WORD_SEPARATOR)) //wczytujemy wszystkie elementy listy
+		while (getline(in, tmp)) //wczytujemy wszystkie elementy listy
+		{
 			inputList->push_back(tmp);
+		}
 		return inputList;
 	}
 	else
@@ -32,7 +34,7 @@ map<string, string>* IOManager::loadMapFromFile(string fileName)
 		string key, word;
 		while (getline(in, word, WORD_SEPARATOR)) //wczytujemy wszystkie elementy s³ownika, najpierw s³owo
 		{
-			getline(in, key, WORD_SEPARATOR); //nastêpnie klucz
+			getline(in, key); //nastêpnie klucz
 			inputMap->insert({ key, word });
 		}
 		return inputMap;

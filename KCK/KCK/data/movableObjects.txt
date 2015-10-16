@@ -1,6 +1,6 @@
-pud³;
-pude³e;
-karton;
-paczk;
-skrzyn;
-grat;
+pud³
+pude³e
+karton
+paczk
+skrzyn
+grat

@@ -7,6 +7,7 @@
 //////////////////
 
 #include "IOManager.h"
+#include "NaturalInterpreter.h"
 
 #include <iostream>
 using namespace std;
@@ -15,14 +16,10 @@ int main()
 {
 
 
-
 	//sandbox 
-	map<string, string>* myMap;
-	myMap = IOManager::loadMapFromFile("test.txt");
-	for (auto elem : *myMap)
-	{
-		std::cout << elem.first << " " << elem.second << "\n";
-	}
+	NaturalInterpreter ni;
+	ni.recognizeOrder("");
+
 	getchar();
 	//end of sandbox
 

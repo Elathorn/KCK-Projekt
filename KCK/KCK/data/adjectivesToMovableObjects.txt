@@ -1,0 +1,8 @@
+czerwo;red;
+niebiesk;blue;
+zolt;yellow;
+czarn;black;
+bial;white;
+zielon;green;
+duz;big;
+mal;small;

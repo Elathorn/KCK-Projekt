@@ -12,5 +12,6 @@ public:
 	static const int FILE_FAILED_TO_LOAD = 100;
 	//2XX pointers errors
 	static const int GRID_IS_NOT_A_SHELF = 200;
+	static const int MAYBE_NULLPTR_EXCEPTION = 201;
 };
 

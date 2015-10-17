@@ -12,8 +12,20 @@ Mechanic::Mechanic()
 	}
 
 	//tmp
-	_map[5][5] = new Shelf(0, 0, NULL, NULL, NULL);
 	//end of tmp
+
+
+	//tmp objects
+	MovableObject* obj;
+	obj = new MovableObject(5, 5, "red", "big");
+	_movableObjects.push_back(obj);
+	//end of tmp
+	//tmp shelves
+	Grid* shelf;
+	shelf = new Shelf(5, 5, obj, NULL, NULL);
+	_map[5][5] = shelf;
+	_grids.push_back(shelf);
+	//end of tmp shelves
 }
 
 
@@ -21,9 +33,16 @@ Mechanic::~Mechanic()
 {
 }
 
-void Mechanic::moveObject(Shelf* newShelf, Object * object, char shelfLvl)
+void Mechanic::moveObject(Shelf* newShelf, MovableObject * movableObject, char shelfLvl)
 {
-	//search on shelf
-	object->move(newShelf->getLocationX(), newShelf->getLocationY()); //zmieniamy koordytany obiektu (pude³ka)
-	newShelf->setShelf(object, shelfLvl);
+	Shelf* oldShelf = dynamic_cast<Shelf*>(_map[movableObject->getLocationXAxis()][movableObject->getLocationYAxis()]);
+	if (oldShelf == NULL) //jeœli wybrany grid jakimœ cudem nie jest pó³k¹
+	{
+		ErrorHandler::errorMessage(ErrorHandler::GRID_IS_NOT_A_SHELF, "");
+		return;
+	}
+	oldShelf->setShelf(NULL,(oldShelf->searchShelves(movableObject))); //usuniêcie pude³ka z starej lokalizacji
+	movableObject->move(newShelf->getLocationX(), newShelf->getLocationY()); //zmieniamy koordytany obiektu (pude³ka)
+	newShelf->setShelf(movableObject, shelfLvl); //dodajemy pude³ko na nowej lokalizacji
+	return;
 }

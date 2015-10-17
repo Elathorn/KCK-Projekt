@@ -1,9 +1,9 @@
-#include "Object.h"
+#include "MovableObject.h"
 
 
 
 
-Object::Object(int LocationXAxis, int LocationYAxis, string color, string size)
+MovableObject::MovableObject(int LocationXAxis, int LocationYAxis, string color, string size)
 {
 	_locationXAxis = LocationXAxis;
 	_locationYAxis = LocationYAxis;
@@ -11,11 +11,11 @@ Object::Object(int LocationXAxis, int LocationYAxis, string color, string size)
 	_size = size;
 }
 
-Object::~Object()
+MovableObject::~MovableObject()
 {
 }
 
-int Object::move(int newX, int newY)
+int MovableObject::move(int newX, int newY)
 {
 	if (newX != -1)
 		_locationXAxis = newX;

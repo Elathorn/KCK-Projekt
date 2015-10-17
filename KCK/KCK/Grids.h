@@ -1,5 +1,5 @@
 #pragma once
-#include "Object.h"
+#include "MovableObject.h"
 
 class Grid
 {
@@ -21,21 +21,21 @@ protected:
 class Shelf : public Grid
 {
 public:
-	Shelf(int locationXAxis, int locationYAxis, Object* topShelf, Object* midShelf, Object* botShelf);
+	Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf);
 //	~Shelf();
 
 
-	Object* getTopShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
-	Object* getMidShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
-	Object* getBotShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
-	Object* getShelf(char); //zwraca zawartoœæ wybranej pó³ki
+	MovableObject* getTopShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
+	MovableObject* getMidShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
+	MovableObject* getBotShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
+	MovableObject* getShelf(char); //zwraca zawartoœæ wybranej pó³ki
 
-	void setShelf(Object*, char); //zmienia zawartoœæ wybranej pó³ki
-	void setTopShelf(Object* newShelf) { _topShelf = newShelf; } //zmienia zawartoœæ danej pó³ki
-	void setMidShelf(Object* newShelf) { _midShelf = newShelf; } //zmienia zawartoœæ danej pó³ki
-	void setBotShelf(Object* newShelf) { _botShelf = newShelf; } //zmienia zawartoœæ danej pó³ki
+	void setShelf(MovableObject*, char); //zmienia zawartoœæ wybranej pó³ki
+	void setTopShelf(MovableObject* newShelf) { _topShelf = newShelf; } //zmienia zawartoœæ danej pó³ki
+	void setMidShelf(MovableObject* newShelf) { _midShelf = newShelf; } //zmienia zawartoœæ danej pó³ki
+	void setBotShelf(MovableObject* newShelf) { _botShelf = newShelf; } //zmienia zawartoœæ danej pó³ki
 
-	char searchShelves(Object* obj); //szuka obiektu na pó³kach
+	char searchShelves(MovableObject* obj); //szuka obiektu na pó³kach
 
 	int getLocationX() { return _locationXAxis; }
 	int getLocationY() { return _locationYAxis; }
@@ -50,9 +50,9 @@ public:
 	static const char BOT_SHELF = 'b';
 	static const char NO_SHELF = 'n';
 private:
-	Object* _topShelf;
-	Object* _midShelf;
-	Object* _botShelf;
+	MovableObject* _topShelf;
+	MovableObject* _midShelf;
+	MovableObject* _botShelf;
 	int _locationXAxis;
 	int _locationYAxis;
 };

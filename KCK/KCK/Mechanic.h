@@ -1,5 +1,6 @@
 #pragma once
 #include "Grids.h"
+#include "ErrorHandler.h"
 #include <vector>
 using namespace std;
 
@@ -14,11 +15,14 @@ public:
 	Mechanic();
 	~Mechanic();
 
-	void moveObject(Shelf*, Object*, char); //przenosi obiekt do wybranej lokalizacji
+	void moveObject(Shelf*, MovableObject*, char); //przenosi obiekt do wybranej lokalizacji
 
+	
+	//todo: przenieœæ do private
 	Grid* _map[MAP_X_SIZE][MAP_Y_SIZE];
 private:
-	vector<Object*> _objects;
+
+	vector<MovableObject*> _movableObjects;
 	vector<Grid*> _grids;
 	Grid* _emptyGrid;
 

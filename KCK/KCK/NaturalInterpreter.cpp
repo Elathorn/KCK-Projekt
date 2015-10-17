@@ -1,7 +1,9 @@
 #include "NaturalInterpreter.h"
 #include "IOManager.h"
 #include <algorithm>
+#include "ErrorHandler.h"
 #include "MovableObject.h"
+#include "Mechanic.h"
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -13,12 +15,12 @@ NaturalInterpreter::NaturalInterpreter()
 	_ordersMap = IOManager::loadMapFromFile("orders.txt");
 	_possitiveResponsesMap = IOManager::loadMapFromFile("affirmative.txt");
 	_shelvesMap = IOManager::loadMapFromFile("shelves.txt");
-	_movableMovableObjectsMap = IOManager::loadMapFromFile("movableMovableObjects.txt");
+	_movableObjectsMap = IOManager::loadMapFromFile("movableObjects.txt");
 	_adjToShelvesMap = IOManager::loadMapFromFile("adjectivesToShelves.txt");
-	_adjToMovableMovableObjectsMap = IOManager::loadMapFromFile("adjectivesToMovableMovableObjects.txt");
+	_colorOfMovableObjectsMap = IOManager::loadMapFromFile("colorsOfMovableObjects.txt");
+	_sizeOfMovableObjectsMap = IOManager::loadMapFromFile("sizesOfMovableObjects.txt");
 
 }
-
 
 NaturalInterpreter::~NaturalInterpreter()
 {
@@ -26,14 +28,13 @@ NaturalInterpreter::~NaturalInterpreter()
 	delete _ordersMap;
 	delete _possitiveResponsesMap;
 	delete _shelvesMap;
-	delete _movableMovableObjectsMap;
+	delete _movableObjectsMap;
 	delete _adjToShelvesMap;
-	delete _adjToMovableMovableObjectsMap;
+	delete _sizeOfMovableObjectsMap;
+	delete _colorOfMovableObjectsMap;
 }
 
-
-
-vector < string > * NaturalInterpreter::tokenizer(string str, char separator)\
+vector < string > * NaturalInterpreter::tokenizer(string str, char separator)
 //Z zadanego stringa tworzy vector stworzony z ka¿dego s³owa ze stringa
 {
 	vector < string > * temp = new vector <string> ();
@@ -74,62 +75,79 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string movableMovableObject;
+	string movableObject;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
-		for (std::map<string,string>::iterator itm = _movableMovableObjectsMap->begin(); itm != _movableMovableObjectsMap->end(); ++itm)
+		for (std::map<string,string>::iterator itm = _movableObjectsMap->begin(); itm != _movableObjectsMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				movableMovableObject = itm->second;
+				movableObject = itm->second;
 				itv->clear();
 				break;
 			}
 		}
 	}
 
-	string adjToMovableMovableObject;
+	string sizeOfMovableObject;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
-		for (std::map<string, string>::iterator itm = _adjToMovableMovableObjectsMap->begin(); itm != _adjToMovableMovableObjectsMap->end(); ++itm)
+		for (std::map<string, string>::iterator itm = _sizeOfMovableObjectsMap->begin(); itm != _sizeOfMovableObjectsMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				adjToMovableMovableObject = itm->second;
+				sizeOfMovableObject = itm->second;
 				itv->clear();
 				break;
 			}
 		}
 	}
-	string shelves;
+
+	string colorOfMovableObject;
+	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
+	{
+		for (std::map<string, string>::iterator itm = _colorOfMovableObjectsMap->begin(); itm != _colorOfMovableObjectsMap->end(); ++itm)
+		{
+			if (itv->find(itm->first) != string::npos)
+			{
+				colorOfMovableObject = itm->second;
+				itv->clear();
+				break;
+			}
+		}
+	}
+
+	string shelf;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = _shelvesMap->begin(); itm != _shelvesMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				shelves = itm->second;
+				shelf = itm->second;
 				itv->clear();
 				break;
 			}
 		}
 	}
 
-	string adjToShelves;
+	string adjToShelf;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = _adjToShelvesMap->begin(); itm != _adjToShelvesMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				adjToShelves = itm->second;
+				adjToShelf = itm->second;
 				itv->clear();
 				break;
 			}
 		}
 	}
+	//temp
+		
+	//(mechanic.findMovableObject(colorOfMovableObject, sizeOfMovableObject))
 	
-
-
+	
 	return int(orderFound);
 }

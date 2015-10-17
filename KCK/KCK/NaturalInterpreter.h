@@ -10,13 +10,14 @@ public:
 	NaturalInterpreter();
 	~NaturalInterpreter();
 	int recognizeOrder(string humanInput);
-	vector<string>* tokenizer(string input, char separator);
 private:
+	vector<string>* tokenizer(string input, char separator);
 	map<string, string>* _ordersMap; //mapa wykrywanych rozkazów
 	map<string, string>* _possitiveResponsesMap; //mapa z pozytywnymi odpowiedziami
 	map<string, string>* _shelvesMap; //mapa wykrywanych okreœleñ na pó³kê
-	map<string, string>* _movableMovableObjectsMap; //mapa wykrywanych okreœleñ na obiekt
+	map<string, string>* _movableObjectsMap; //mapa wykrywanych okreœleñ na obiekt
 	map<string, string>* _adjToShelvesMap; //mapa przymiotników do pó³ek
-	map<string, string>* _adjToMovableMovableObjectsMap; //mapa przymiotników do obiektów
+	map<string, string>* _colorOfMovableObjectsMap; //mapa kolorów obiektów
+	map<string, string>* _sizeOfMovableObjectsMap; //mapa wielkoœci obiektów
 };
 

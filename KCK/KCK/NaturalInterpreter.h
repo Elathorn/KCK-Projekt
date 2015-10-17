@@ -10,6 +10,7 @@ public:
 	NaturalInterpreter();
 	~NaturalInterpreter();
 	vector <string> * recognizeOrder(string humanInput);
+	string tokenSearcher(vector <string> * words, map <string, string> * map, string type = "");
 private:
 	vector<string>* tokenizer(string input, char separator);
 	map<string, string>* _ordersMap; //mapa wykrywanych rozkazów

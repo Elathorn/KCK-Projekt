@@ -42,14 +42,11 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	if (!lvlOfShelfChar) //jeœli nie istnieje lokalizator konkretnej pó³ki (przegródki)
 		return randomizeAnswer(rackNotFound);
 
-
-
 	if (script->at(order) == "go")
 		if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar))
 			return randomizeAnswer(shelfIsFull);
 		else
 			return randomizeAnswer(goOrderDone);
-
 
 	return randomizeAnswer(commandNotUnderstanded);
 }

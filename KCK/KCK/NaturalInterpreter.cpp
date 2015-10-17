@@ -56,124 +56,34 @@ vector < string > * NaturalInterpreter::tokenizer(string str, char separator)
 	return temp;
 }
 
-vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
-//Wyszukuje s³owa kluczowe i rozpoznaje dane: rozkaz, miejsce szafki, pó³ka szafki, kolor paczki, rozmiar paczki
+string NaturalInterpreter::tokenSearcher(vector <string> * words, map <string, string> * map, string type)
 {
-	vector <string> * words = tokenizer(humanInput, ' ');
-
-	string order = "";
-	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv) 
+	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
-		for (std::map<string, string>::iterator itm = _ordersMap->begin(); itm != _ordersMap->end(); ++itm)
+		for (std::map<string, string>::iterator itm = map->begin(); itm != map->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				order = itm->second;
+				type = itm->second;
 				itv->erase();
 				break;
 			}
 		}
 	}
+	return type;
+}
 
-	string movableObject = "";
-	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
-	{
-		for (std::map<string,string>::iterator itm = _movableObjectsMap->begin(); itm != _movableObjectsMap->end(); ++itm)
-		{
-			if (itv->find(itm->first) != string::npos)
-			{
-				movableObject = itm->second;
-				itv->clear();
-				break;
-			}
-		}
-	}
-
-	string sizeOfMovableObject = "";
-	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
-	{
-		for (std::map<string, string>::iterator itm = _sizeOfMovableObjectsMap->begin(); itm != _sizeOfMovableObjectsMap->end(); ++itm)
-		{
-			if (itv->find(itm->first) != string::npos)
-			{
-				sizeOfMovableObject = itm->second;
-				itv->clear();
-				break;
-			}
-		}
-	}
-
-	string colorOfMovableObject = "";
-	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
-	{
-		for (std::map<string, string>::iterator itm = _colorOfMovableObjectsMap->begin(); itm != _colorOfMovableObjectsMap->end(); ++itm)
-		{
-			if (itv->find(itm->first) != string::npos)
-			{
-				colorOfMovableObject = itm->second;
-				itv->clear();
-				break;
-			}
-		}
-	}
-
-	string shelf = "";
-	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
-	{
-		for (std::map<string, string>::iterator itm = _shelvesMap->begin(); itm != _shelvesMap->end(); ++itm)
-		{
-			if (itv->find(itm->first) != string::npos)
-			{
-				shelf = itm->second;
-				itv->clear();
-				break;
-			}
-		}
-	}
-
-	string adjToShelf = "";
-	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
-	{
-		for (std::map<string, string>::iterator itm = _adjToShelvesMap->begin(); itm != _adjToShelvesMap->end(); ++itm)
-		{
-			if (itv->find(itm->first) != string::npos)
-			{
-				adjToShelf = itm->second;
-				itv->clear();
-				break;
-			}
-		}
-	}
-
-	string lvlOfShelf = "";
-	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
-	{
-		for (std::map<string, string>::iterator itm = _lvlOfShelves->begin(); itm != _lvlOfShelves->end(); ++itm)
-		{
-			if (itv->find(itm->first) != string::npos)
-			{
-				lvlOfShelf = itm->second;
-				itv->clear();
-				break;
-			}
-		}
-	}
+vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
+//Wyszukuje s³owa kluczowe i rozpoznaje dane: rozkaz, miejsce szafki, pó³ka szafki, kolor paczki, rozmiar paczki
+{
+	vector <string> * words = tokenizer(humanInput, ' ');
 
 	vector <string> * interpretation = new vector <string>();
-	interpretation->push_back(order);
-	interpretation->push_back(adjToShelf);
-	interpretation->push_back(lvlOfShelf);
-	interpretation->push_back(colorOfMovableObject);
-	interpretation->push_back(sizeOfMovableObject);
-
-	
-	/*
-	Mechanic mechani;
-	cout << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationXAxis() << " " << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationYAxis() << endl;
-	
-	mechani.moveObject(mechani.findShelf(adjToShelf), mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject), lvlOfShelf[0]);
-	cout << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationXAxis() << " " << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationYAxis() << endl;
-	*/
+	interpretation->push_back(tokenSearcher(words, _ordersMap));
+	interpretation->push_back(tokenSearcher(words, _adjToShelvesMap));
+	interpretation->push_back(tokenSearcher(words, _lvlOfShelves));
+	interpretation->push_back(tokenSearcher(words, _colorOfMovableObjectsMap));
+	interpretation->push_back(tokenSearcher(words, _sizeOfMovableObjectsMap));
 	
 	return interpretation;
 }

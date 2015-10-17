@@ -2,11 +2,11 @@
 #include "string"
 using namespace std;
 
-class Object
+class MovableObject
 {
 public:
-	Object(int, int, string, string);
-	~Object();
+	MovableObject(int posX, int posY, string color, string size);
+	~MovableObject();
 
 	string getSize() { return _size; }
 	string getColor() { return _color; }

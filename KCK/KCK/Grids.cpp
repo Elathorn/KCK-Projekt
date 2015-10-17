@@ -6,7 +6,7 @@ Grid::Grid()
 }
 
 
-Shelf::Shelf(int locationXAxis, int locationYAxis, Object* topShelf, Object* midShelf, Object* botShelf) 
+Shelf::Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf) 
 {
 	_locationXAxis = locationXAxis;
 	_locationYAxis = locationYAxis;
@@ -17,7 +17,7 @@ Shelf::Shelf(int locationXAxis, int locationYAxis, Object* topShelf, Object* mid
 
 
 
-Object * Shelf::getTopShelf()
+MovableObject * Shelf::getTopShelf()
 {
 	if (_topShelf != nullptr)
 		return nullptr;
@@ -25,7 +25,7 @@ Object * Shelf::getTopShelf()
 		return _topShelf;
 }
 
-Object * Shelf::getMidShelf()
+MovableObject * Shelf::getMidShelf()
 {
 	if (_midShelf != nullptr)
 		return nullptr;
@@ -33,7 +33,7 @@ Object * Shelf::getMidShelf()
 		return _midShelf;
 }
 
-Object * Shelf::getBotShelf()
+MovableObject * Shelf::getBotShelf()
 {
 	if (_botShelf != nullptr)
 		return nullptr;
@@ -41,7 +41,7 @@ Object * Shelf::getBotShelf()
 		return _botShelf;
 }
 
-Object* Shelf::getShelf(char shelfPos)
+MovableObject* Shelf::getShelf(char shelfPos)
 {
 	switch (shelfPos)
 	{
@@ -52,7 +52,7 @@ Object* Shelf::getShelf(char shelfPos)
 	}
 }
 
-void Shelf::setShelf(Object * newObj, char pos)
+void Shelf::setShelf(MovableObject * newObj, char pos)
 {
 	switch (pos)
 	{
@@ -62,7 +62,7 @@ void Shelf::setShelf(Object * newObj, char pos)
 	}
 }
 
-char Shelf::searchShelves(Object * obj)
+char Shelf::searchShelves(MovableObject * obj)
 {
 	if (_topShelf == obj)
 		return TOP_SHELF;

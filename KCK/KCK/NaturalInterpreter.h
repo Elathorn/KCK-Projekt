@@ -9,7 +9,7 @@ class NaturalInterpreter //interpretacja jêzyka naturalnego
 public:
 	NaturalInterpreter();
 	~NaturalInterpreter();
-	int recognizeOrder(string humanInput);
+	vector <string> * recognizeOrder(string humanInput);
 private:
 	vector<string>* tokenizer(string input, char separator);
 	map<string, string>* _ordersMap; //mapa wykrywanych rozkazów

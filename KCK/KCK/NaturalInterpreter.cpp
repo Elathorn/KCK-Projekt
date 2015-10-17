@@ -56,19 +56,19 @@ vector < string > * NaturalInterpreter::tokenizer(string str, char separator)
 	return temp;
 }
 
-int NaturalInterpreter::recognizeOrder(string humanInput)
-//Wyszukuje s³owa kluczowe i rozpoznaje dane
+vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
+//Wyszukuje s³owa kluczowe i rozpoznaje dane: rozkaz, miejsce szafki, pó³ka szafki, kolor paczki, rozmiar paczki
 {
 	vector <string> * words = tokenizer(humanInput, ' ');
 
-	bool orderFound = false;
+	string order;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv) 
 	{
 		for (std::map<string, string>::iterator itm = _ordersMap->begin(); itm != _ordersMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				orderFound = true;
+				order = itm->second;
 				itv->erase();
 				break;
 			}
@@ -158,13 +158,22 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 			}
 		}
 	}
-	//temp
+
+	vector <string> * interpretation = new vector <string>();
+	interpretation->push_back(order);
+	interpretation->push_back(adjToShelf);
+	interpretation->push_back(lvlOfShelf);
+	interpretation->push_back(colorOfMovableObject);
+	interpretation->push_back(sizeOfMovableObject);
+
+	
+	/*
 	Mechanic mechani;
 	cout << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationXAxis() << " " << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationYAxis() << endl;
 	
 	mechani.moveObject(mechani.findShelf(adjToShelf), mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject), lvlOfShelf[0]);
 	cout << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationXAxis() << " " << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationYAxis() << endl;
-	//temp
+	*/
 	
-	return int(orderFound);
+	return interpretation;
 }

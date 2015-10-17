@@ -56,7 +56,7 @@ string ScriptInterpreter::randomizeAnswer(int enumInt)
 	case (movableObjNotFound) : return _movableObjNotFoundTxt->at(randomNumber(_movableObjNotFoundTxt->size()));break;
 	case (shelfIsFull) : return _shelfIsFullTxt->at(randomNumber(_shelfIsFullTxt->size()));break;
 	case (commandNotUnderstanded) : return _commandNotUnderstandedTxt->at(randomNumber(_commandNotUnderstandedTxt->size()));break;
-	case (goOrderDone) : return _commandNotUnderstandedTxt->at(randomNumber(_commandNotUnderstandedTxt->size())); break;
+	case (goOrderDone) : return _goOrderDoneTxt->at(randomNumber(_goOrderDoneTxt->size())); break;
 	}
 
 }

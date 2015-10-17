@@ -2,13 +2,13 @@
 
 const string IOManager::DATA_FILES_LOCATION = "data/";
 
-list<string>* IOManager::loadListFromFile(string fileName)
+vector<string>* IOManager::loadVectorFromFile(string fileName)
 {
 	string location = DATA_FILES_LOCATION + fileName;
 	ifstream in(location.c_str());
 	if (in)
 	{
-		list<string>* inputList = new list<string>;
+		vector<string>* inputList = new vector<string>;
 		string tmp;
 		while (getline(in, tmp)) //wczytujemy wszystkie elementy listy
 		{

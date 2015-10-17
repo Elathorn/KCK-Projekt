@@ -13,7 +13,9 @@ void ErrorHandler::errorMessage(int errorNumber, std::string errorString="")
 	case (MAYBE_NULLPTR_EXCEPTION) :
 		_errorHelper = "Error 201: Nullptr (Prawdopodobnie nie znaleziono obiektu, który mia³ byæ zanaleziony)";break;
 	case(SCRIPT_INTERPRETATION_ERROR) :
-		_errorHelper = "Error 300: B³¹d interpretera skryptów.";
+		_errorHelper = "Error 300: B³¹d interpretera skryptów.";break;
+	case(WANT_NONEXIST_RESPONSE) :
+		_errorHelper = "Error 301: Program oczekuje nieistniejacego typu odpowiedzi.";break;
 	default:
 		_errorHelper = "Niespodziewany b³¹d."; break;
 	}

@@ -15,5 +15,6 @@ public:
 	static const int MAYBE_NULLPTR_EXCEPTION = 201;
 	//3XX logic errors
 	static const int SCRIPT_INTERPRETATION_ERROR = 300;
+	static const int WANT_NONEXIST_RESPONSE = 301;
 };
 

@@ -28,6 +28,9 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	vector<string>* script = _NI->recognizeOrder(humanInput);
 	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject };
 	
+	if (script->at(order) == "");
+		return randomizeAnswer(commandNotUnderstanded);
+
 	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara
 
 	Shelf* shelf = _mechanic->findShelf(script->at(adjToShelf));

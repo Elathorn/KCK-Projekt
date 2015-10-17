@@ -8,6 +8,7 @@
 
 #include "IOManager.h"
 #include "NaturalInterpreter.h"
+#include "Mechanic.h"
 
 #include <iostream>
 using namespace std;
@@ -17,8 +18,13 @@ int main()
 
 
 	//sandbox 
-	NaturalInterpreter ni;
-	cout << ni.recognizeOrder("Wez czerwone pudlo");
+	Mechanic mech;
+	for (int x = 9; x > 0; x--)
+	{
+		for (int y = 0; y < 10; y++)
+			cout << mech._map[x][y]->getGridType();
+		cout << endl;
+	}
 
 	getchar();
 	//end of sandbox

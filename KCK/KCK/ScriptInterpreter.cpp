@@ -19,11 +19,7 @@ ScriptInterpreter::ScriptInterpreter()
 
 ScriptInterpreter::~ScriptInterpreter()
 {
-	delete _shelfIsFullTxt;
-	delete _movableObjNotFoundTxt;
-	delete _shelfIsFullTxt;
-	delete _commandNotUnderstandedTxt;
-	delete _goOrderDoneTxt;
+	
 }
 
 string ScriptInterpreter::interpretUserInput(string humanInput)

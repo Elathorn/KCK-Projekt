@@ -61,7 +61,7 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 {
 	vector <string> * words = tokenizer(humanInput, ' ');
 
-	string order;
+	string order = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv) 
 	{
 		for (std::map<string, string>::iterator itm = _ordersMap->begin(); itm != _ordersMap->end(); ++itm)
@@ -75,7 +75,7 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string movableObject;
+	string movableObject = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string,string>::iterator itm = _movableObjectsMap->begin(); itm != _movableObjectsMap->end(); ++itm)
@@ -89,7 +89,7 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string sizeOfMovableObject;
+	string sizeOfMovableObject = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = _sizeOfMovableObjectsMap->begin(); itm != _sizeOfMovableObjectsMap->end(); ++itm)
@@ -103,7 +103,7 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string colorOfMovableObject;
+	string colorOfMovableObject = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = _colorOfMovableObjectsMap->begin(); itm != _colorOfMovableObjectsMap->end(); ++itm)
@@ -117,7 +117,7 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string shelf;
+	string shelf = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = _shelvesMap->begin(); itm != _shelvesMap->end(); ++itm)
@@ -131,7 +131,7 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string adjToShelf;
+	string adjToShelf = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = _adjToShelvesMap->begin(); itm != _adjToShelvesMap->end(); ++itm)
@@ -145,7 +145,7 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string lvlOfShelf;
+	string lvlOfShelf = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = _lvlOfShelves->begin(); itm != _lvlOfShelves->end(); ++itm)

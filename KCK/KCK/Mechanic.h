@@ -1,6 +1,7 @@
 #pragma once
 #include "Grids.h"
 #include "ErrorHandler.h"
+#include "Logger.h"
 #include <vector>
 using namespace std;
 

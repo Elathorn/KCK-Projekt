@@ -18,7 +18,7 @@ int main()
 
 	//sandbox 
 	NaturalInterpreter ni;
-	cout << ni.recognizeOrder("Wez czerwone pudlo");
+	cout << ni.recognizeOrder("Wez czerwone pudlo i zanies je na gorna polke");
 
 	getchar();
 	//end of sandbox

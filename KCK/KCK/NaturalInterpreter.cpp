@@ -32,7 +32,8 @@ NaturalInterpreter::~NaturalInterpreter()
 
 
 
-vector < string > * NaturalInterpreter::tokenizer(string str, char separator)
+vector < string > * NaturalInterpreter::tokenizer(string str, char separator)\
+//Z zadanego stringa tworzy vector stworzony z ka¿dego s³owa ze stringa
 {
 	vector < string > * temp = new vector <string> ();
 	int lastStringPos = 0;
@@ -54,8 +55,10 @@ vector < string > * NaturalInterpreter::tokenizer(string str, char separator)
 }
 
 int NaturalInterpreter::recognizeOrder(string humanInput)
+//Wyszukuje s³owa kluczowe i rozpoznaje dane
 {
 	vector <string> * words = tokenizer(humanInput, ' ');
+
 	bool orderFound = false;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv) 
 	{
@@ -64,31 +67,68 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 			if (itv->find(itm->first) != string::npos)
 			{
 				orderFound = true;
+				itv->erase();
 				break;
 			}
 		}
 	}
-	
 
-	bool movableObjectFound = false;
+	string movableObject;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string,string>::iterator itm = _movableObjectsMap->begin(); itm != _movableObjectsMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				movableObjectFound = true;
+				movableObject = itm->second;
+				itv->clear();
 				break;
 			}
 		}
 	}
 
-	
-	
+	string adjToMovableObject;
+	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
+	{
+		for (std::map<string, string>::iterator itm = _adjToMovableObjectsMap->begin(); itm != _adjToMovableObjectsMap->end(); ++itm)
+		{
+			if (itv->find(itm->first) != string::npos)
+			{
+				adjToMovableObject = itm->second;
+				itv->clear();
+				break;
+			}
+		}
+	}
+	string shelves;
+	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
+	{
+		for (std::map<string, string>::iterator itm = _shelvesMap->begin(); itm != _shelvesMap->end(); ++itm)
+		{
+			if (itv->find(itm->first) != string::npos)
+			{
+				shelves = itm->second;
+				itv->clear();
+				break;
+			}
+		}
+	}
+
+	string adjToShelves;
+	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
+	{
+		for (std::map<string, string>::iterator itm = _adjToShelvesMap->begin(); itm != _adjToShelvesMap->end(); ++itm)
+		{
+			if (itv->find(itm->first) != string::npos)
+			{
+				adjToShelves = itm->second;
+				itv->clear();
+				break;
+			}
+		}
+	}
 
 
 
-	
-	
 	return int(orderFound);
 }

@@ -13,10 +13,10 @@ public:
 	vector<string>* tokenizer(string input, char separator);
 private:
 
-	map<string, string>* _ordersMap; //lista wykrywanych rozkazów
-	map<string, string>* _possitiveResponsesMap; //lista z pozytywnymi odpowiedziami
-	map<string, string>* _shelvesMap; //lista wykrywanych okreœleñ na pó³kê
-	map<string, string>* _movableObjectsMap; //lista wykrywanych okreœleñ na obiekt
+	map<string, string>* _ordersMap; //mapa wykrywanych rozkazów
+	map<string, string>* _possitiveResponsesMap; //mapa z pozytywnymi odpowiedziami
+	map<string, string>* _shelvesMap; //mapa wykrywanych okreœleñ na pó³kê
+	map<string, string>* _movableObjectsMap; //mapa wykrywanych okreœleñ na obiekt
 	map<string, string>* _adjToShelvesMap; //mapa przymiotników do pó³ek
 	map<string, string>* _adjToMovableObjectsMap; //mapa przymiotników do obiektów
 };

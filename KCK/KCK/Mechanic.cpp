@@ -5,7 +5,7 @@
 Mechanic::Mechanic()
 {
 	_emptyGrid = new Grid();
-	for (int x = MAP_X_SIZE-1; x > 0; x--)
+	for (int x = MAP_X_SIZE-1; x >= 0; x--)
 	{
 		for (int y = 0; y < MAP_Y_SIZE; y++)
 			_map[x][y] = _emptyGrid; //wype³nienie ca³ej mapy pustk¹
@@ -17,20 +17,22 @@ Mechanic::Mechanic()
 
 	//tmp objects
 	MovableObject* obj;
-	obj = new MovableObject(5, 5, "red", "big");
-	_movableObjects.push_back(obj);
+	obj = new MovableObject(MAP_X_SIZE-1, MAP_Y_SIZE /2, "red", "big");
+	_movableObjectsVec.push_back(obj);
 	//end of tmp
 	//tmp shelves
 	Grid* shelf;
-	shelf = new Shelf(5, 5, obj, NULL, NULL);
-	_map[5][5] = shelf;
-	_grids.push_back(shelf);
+	shelf = new Shelf(MAP_X_SIZE-1, MAP_Y_SIZE /2, obj, NULL, NULL);
+	_map[MAP_X_SIZE-1][MAP_Y_SIZE/2] = shelf;
+	Shelf* shelf2 = dynamic_cast<Shelf*>(shelf);
+	_shelvesVec.push_back(shelf2);
 	//end of tmp shelves
 }
 
 
 Mechanic::~Mechanic()
 {
+
 }
 
 void Mechanic::moveObject(Shelf* newShelf, MovableObject * movableObject, char shelfLvl)
@@ -49,9 +51,40 @@ void Mechanic::moveObject(Shelf* newShelf, MovableObject * movableObject, char s
 
 MovableObject * Mechanic::findMovableObject(string color, string size)
 {
-	for (auto & it : _movableObjects)
+	for (auto & it : _movableObjectsVec)
 	{ //szuka przedmiotu o takim samym kolorze i rozmiarze
 		if ((color == "" || color == it->getColor()) && (size == "" || size == it->getSize()))
+			return it;
+	}
+	return NULL;
+}
+
+Shelf * Mechanic::findShelf(string locationStr)
+{
+	int locationX, locationY;
+	if (locationStr == "north")
+	{
+		locationY = MAP_Y_SIZE-1;
+		locationX = MAP_X_SIZE / 2;
+	}
+	if (locationStr == "south")
+	{
+		locationY = 0;
+		locationX = MAP_X_SIZE / 2;
+	}
+	if (locationStr == "east")
+	{
+		locationY = MAP_Y_SIZE / 2;
+		locationX = MAP_X_SIZE-1;
+	}
+	if (locationStr == "west")
+	{
+		locationY = MAP_Y_SIZE / 2;
+		locationX = 0;
+	}
+	for (auto & it : _shelvesVec)
+	{
+		if (it->getLocationX() == locationX && it->getLocationY() == locationY)
 			return it;
 	}
 	return NULL;

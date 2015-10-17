@@ -46,3 +46,13 @@ void Mechanic::moveObject(Shelf* newShelf, MovableObject * movableObject, char s
 	newShelf->setShelf(movableObject, shelfLvl); //dodajemy pude³ko na nowej lokalizacji
 	return;
 }
+
+MovableObject * Mechanic::findMovableObject(string color, string size)
+{
+	for (auto & it : _movableObjects)
+	{ //szuka przedmiotu o takim samym kolorze i rozmiarze
+		if ((color == "" || color == it->getColor()) && (size == "" || size == it->getSize()))
+			return it;
+	}
+	return NULL;
+}

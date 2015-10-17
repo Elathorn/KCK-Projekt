@@ -26,7 +26,6 @@ int main()
 		cout << endl;
 		mech 
 	}
-
 	getchar();
 	//end of sandbox
 

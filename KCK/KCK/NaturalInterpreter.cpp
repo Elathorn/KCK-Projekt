@@ -9,10 +9,10 @@ NaturalInterpreter::NaturalInterpreter()
 {
 	//wczytywanie list
 	//wczytywanie map
-	_ordersList = IOManager::loadMapFromFile("orders.txt");
-	_possitiveResponsesList = IOManager::loadMapFromFile("affirmative.txt");
-	_shelvesList = IOManager::loadMapFromFile("shelves.txt");
-	_movableObjectsList = IOManager::loadMapFromFile("movableObjects.txt");
+	_ordersMap = IOManager::loadMapFromFile("orders.txt");
+	_possitiveResponsesMap = IOManager::loadMapFromFile("affirmative.txt");
+	_shelvesMap = IOManager::loadMapFromFile("shelves.txt");
+	_movableObjectsMap = IOManager::loadMapFromFile("movableObjects.txt");
 	_adjToShelvesMap = IOManager::loadMapFromFile("adjectivesToShelves.txt");
 	_adjToMovableObjectsMap = IOManager::loadMapFromFile("adjectivesToMovableObjects.txt");
 
@@ -21,12 +21,11 @@ NaturalInterpreter::NaturalInterpreter()
 
 NaturalInterpreter::~NaturalInterpreter()
 {
-	//usuwanie list
 	//usuwanie map
-	delete _ordersList;
-	delete _possitiveResponsesList;
-	delete _shelvesList;
-	delete _movableObjectsList;
+	delete _ordersMap;
+	delete _possitiveResponsesMap;
+	delete _shelvesMap;
+	delete _movableObjectsMap;
 	delete _adjToShelvesMap;
 	delete _adjToMovableObjectsMap;
 }
@@ -60,9 +59,9 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 	bool orderFound = false;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv) 
 	{
-		for (std::list<string>::iterator itl = _ordersList->begin(); itl != _ordersList->end(); ++itl)
+		for (std::map<string, string>::iterator itm = _ordersMap->begin(); itm != _ordersMap->end(); ++itm)
 		{
-			if (itv->find(*itl) != string::npos)
+			if (itv->find(itm->first) != string::npos)
 			{
 				orderFound = true;
 				break;
@@ -71,17 +70,12 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 	}
 	
 
-
-
-
-
-
 	bool movableObjectFound = false;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
-		for (std::list<string>::iterator itl = _movableObjectsList->begin(); itl != _movableObjectsList->end(); ++itl)
+		for (std::map<string,string>::iterator itm = _movableObjectsMap->begin(); itm != _movableObjectsMap->end(); ++itm)
 		{
-			if (itv->find(*itl) != string::npos)
+			if (itv->find(itm->first) != string::npos)
 			{
 				movableObjectFound = true;
 				break;

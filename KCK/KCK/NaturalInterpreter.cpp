@@ -19,7 +19,7 @@ NaturalInterpreter::NaturalInterpreter()
 	_adjToShelvesMap = IOManager::loadMapFromFile("adjectivesToShelves.txt");
 	_colorOfMovableObjectsMap = IOManager::loadMapFromFile("colorsOfMovableObjects.txt");
 	_sizeOfMovableObjectsMap = IOManager::loadMapFromFile("sizesOfMovableObjects.txt");
-
+	_lvlOfShelves = IOManager::loadMapFromFile("levelsOfShelves.txt");
 }
 
 NaturalInterpreter::~NaturalInterpreter()
@@ -144,10 +144,27 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 			}
 		}
 	}
+
+	string lvlOfShelf;
+	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
+	{
+		for (std::map<string, string>::iterator itm = _lvlOfShelves->begin(); itm != _lvlOfShelves->end(); ++itm)
+		{
+			if (itv->find(itm->first) != string::npos)
+			{
+				lvlOfShelf = itm->second;
+				itv->clear();
+				break;
+			}
+		}
+	}
 	//temp
-		
-	//(mechanic.findMovableObject(colorOfMovableObject, sizeOfMovableObject))
+	Mechanic mechani;
+	cout << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationXAxis() << " " << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationYAxis() << endl;
 	
+	mechani.moveObject(mechani.findShelf(adjToShelf), mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject), lvlOfShelf[0]);
+	cout << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationXAxis() << " " << mechani.findMovableObject(colorOfMovableObject, sizeOfMovableObject)->getLocationYAxis() << endl;
+	//temp
 	
 	return int(orderFound);
 }

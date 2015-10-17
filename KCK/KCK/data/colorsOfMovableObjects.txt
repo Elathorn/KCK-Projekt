@@ -4,4 +4,3 @@ zolt;yellow
 czarn;black
 bial;white
 zielon;green
-

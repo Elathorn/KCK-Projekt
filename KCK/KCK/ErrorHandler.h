@@ -13,5 +13,7 @@ public:
 	//2XX pointers errors
 	static const int GRID_IS_NOT_A_SHELF = 200;
 	static const int MAYBE_NULLPTR_EXCEPTION = 201;
+	//3XX logic errors
+	static const int SCRIPT_INTERPRETATION_ERROR = 300;
 };
 

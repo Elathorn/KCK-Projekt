@@ -77,21 +77,22 @@ Shelf * Mechanic::findShelf(string locationStr)
 		locationY = MAP_Y_SIZE-1;
 		locationX = MAP_X_SIZE / 2;
 	}
-	if (locationStr == "south")
+	else if (locationStr == "south")
 	{
 		locationY = 0;
 		locationX = MAP_X_SIZE / 2;
 	}
-	if (locationStr == "east")
+	else if (locationStr == "east")
 	{
 		locationY = MAP_Y_SIZE / 2;
 		locationX = MAP_X_SIZE-1;
 	}
-	if (locationStr == "west")
+	else if (locationStr == "west")
 	{
 		locationY = MAP_Y_SIZE / 2;
 		locationX = 0;
 	}
+	else return NULL;
 	for (auto & it : _shelvesVec)
 	{
 		if (it->getLocationX() == locationX && it->getLocationY() == locationY)

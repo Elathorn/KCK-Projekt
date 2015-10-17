@@ -23,11 +23,12 @@ private:
 	vector<string>* _shelfIsFullTxt;
 	vector<string>* _commandNotUnderstandedTxt;
 	vector<string>* _goOrderDoneTxt;
+	vector<string>* _rackNotFoundTxt;
 
 	//answer randomize
 	string randomizeAnswer(int enumInt);
 	int randomNumber(int max);
-	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded };
+	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded, rackNotFound };
 
 };
 

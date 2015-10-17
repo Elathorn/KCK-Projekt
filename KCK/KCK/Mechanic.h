@@ -16,7 +16,7 @@ public:
 	~Mechanic();
 
 	void moveObject(Shelf*, MovableObject*, char); //przenosi obiekt do wybranej lokalizacji
-
+	MovableObject* findMovableObject(string color, string size); //wyszukuje pierwszy obiekt o danej charakterystyce, "" dla braku danych
 	
 	//todo: przenieœæ do private
 	Grid* _map[MAP_X_SIZE][MAP_Y_SIZE];

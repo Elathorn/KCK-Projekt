@@ -25,7 +25,6 @@ int main()
 			cout << mech._map[x][y]->getGridType();
 		cout << endl;
 	}
-
 	getchar();
 	//end of sandbox
 

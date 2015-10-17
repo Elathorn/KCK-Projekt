@@ -69,6 +69,13 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 			}
 		}
 	}
+	
+
+
+
+
+
+
 	bool movableObjectFound = false;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{

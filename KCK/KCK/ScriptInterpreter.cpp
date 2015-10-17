@@ -13,6 +13,7 @@ ScriptInterpreter::ScriptInterpreter()
 	_shelfIsFullTxt = IOManager::loadVectorFromFile("shelfIsFull.txt");
 	_commandNotUnderstandedTxt = IOManager::loadVectorFromFile("commandNotUnderstanded.txt");
 	_goOrderDoneTxt = IOManager::loadVectorFromFile("goOrderDone.txt");
+	_rackNotFoundTxt = IOManager::loadVectorFromFile("rackNotFound.txt");
 
 	srand(time(NULL));
 }
@@ -29,18 +30,23 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	
 	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara
 
+	Shelf* shelf = _mechanic->findShelf(script->at(adjToShelf));
+	if (shelf == NULL) //jeœli nie znaleziono pó³ki
+		return randomizeAnswer(shelfNotFound);
+	MovableObject* obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
+	if (obj == NULL) //jeœli nie znaleziono obiektu
+		return randomizeAnswer(movableObjNotFound);
+	if (!lvlOfShelfChar) //jeœli nie istnieje lokalizator konkretnej pó³ki (przegródki)
+		return randomizeAnswer(rackNotFound);
+
+
+
 	if (script->at(order) == "go")
-	{
-		Shelf* shelf = _mechanic->findShelf(script->at(adjToShelf));
-		if (shelf == NULL) //jeœli nie znaleziono pó³ki
-			return randomizeAnswer(shelfNotFound);
-		MovableObject* obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
-		if (obj == NULL) //jeœli nie znaleziono obiektu
-			return randomizeAnswer(movableObjNotFound);
 		if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar))
 			return randomizeAnswer(shelfIsFull);
 		return randomizeAnswer(goOrderDone);
-	}
+
+
 	return randomizeAnswer(commandNotUnderstanded);
 }
 
@@ -53,6 +59,7 @@ string ScriptInterpreter::randomizeAnswer(int enumInt)
 	case (shelfIsFull) : return _shelfIsFullTxt->at(randomNumber(_shelfIsFullTxt->size()));break;
 	case (commandNotUnderstanded) : return _commandNotUnderstandedTxt->at(randomNumber(_commandNotUnderstandedTxt->size()));break;
 	case (goOrderDone) : return _goOrderDoneTxt->at(randomNumber(_goOrderDoneTxt->size())); break;
+	case (rackNotFound) : return _rackNotFoundTxt->at(randomNumber(_rackNotFoundTxt->size())); break;
 	}
 
 }

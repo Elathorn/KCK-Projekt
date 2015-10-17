@@ -28,9 +28,9 @@ Mechanic::Mechanic()
 	_shelvesVec.push_back(shelf2);
 
 
-	obj = new MovableObject(MAP_X_SIZE - 1, MAP_Y_SIZE / 2, "green", "small");
+	obj = new MovableObject(0, MAP_Y_SIZE / 2, "green", "small");
 	_movableObjectsVec.push_back(obj);
-	shelf = new Shelf(0, MAP_Y_SIZE / 2, NULL, NULL, NULL);
+	shelf = new Shelf(0, MAP_Y_SIZE / 2, obj, NULL, NULL);
 	_map[0][MAP_Y_SIZE / 2] = shelf;
 	shelf2 = dynamic_cast<Shelf*>(shelf);
 	_shelvesVec.push_back(shelf2);
@@ -43,18 +43,20 @@ Mechanic::~Mechanic()
 
 }
 
-void Mechanic::moveObject(Shelf* newShelf, MovableObject * movableObject, char shelfLvl)
+int Mechanic::moveObject(Shelf* newShelf, MovableObject * movableObject, char shelfLvl)
 {
 	Shelf* oldShelf = dynamic_cast<Shelf*>(_map[movableObject->getLocationXAxis()][movableObject->getLocationYAxis()]);
 	if (oldShelf == NULL) //jeœli wybrany grid jakimœ cudem nie jest pó³k¹
 	{
 		ErrorHandler::errorMessage(ErrorHandler::GRID_IS_NOT_A_SHELF, "");
-		return;
+		return 0;
 	}
+	if (newShelf->getShelf(shelfLvl) != NULL)//sprawdzenie, czy nowy pó³ka nie jest pe³na
+		return SHELF_IS_FULL;
 	oldShelf->setShelf(NULL,(oldShelf->searchShelves(movableObject))); //usuniêcie pude³ka z starej lokalizacji
 	movableObject->move(newShelf->getLocationX(), newShelf->getLocationY()); //zmieniamy koordytany obiektu (pude³ka)
 	newShelf->setShelf(movableObject, shelfLvl); //dodajemy pude³ko na nowej lokalizacji
-	return;
+	return 0;
 }
 
 MovableObject * Mechanic::findMovableObject(string color, string size)

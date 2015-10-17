@@ -13,9 +13,9 @@ NaturalInterpreter::NaturalInterpreter()
 	_ordersMap = IOManager::loadMapFromFile("orders.txt");
 	_possitiveResponsesMap = IOManager::loadMapFromFile("affirmative.txt");
 	_shelvesMap = IOManager::loadMapFromFile("shelves.txt");
-	_movableMovableObjectsMap = IOManager::loadMapFromFile("movableMovableObjects.txt");
+	_movableObjectsMap = IOManager::loadMapFromFile("movableObjects.txt");
 	_adjToShelvesMap = IOManager::loadMapFromFile("adjectivesToShelves.txt");
-	_adjToMovableMovableObjectsMap = IOManager::loadMapFromFile("adjectivesToMovableMovableObjects.txt");
+	_adjToMovableObjectsMap = IOManager::loadMapFromFile("adjectivesToMovableObjects.txt");
 
 }
 
@@ -26,9 +26,9 @@ NaturalInterpreter::~NaturalInterpreter()
 	delete _ordersMap;
 	delete _possitiveResponsesMap;
 	delete _shelvesMap;
-	delete _movableMovableObjectsMap;
+	delete _movableObjectsMap;
 	delete _adjToShelvesMap;
-	delete _adjToMovableMovableObjectsMap;
+	delete _adjToMovableObjectsMap;
 }
 
 
@@ -74,28 +74,28 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 		}
 	}
 
-	string movableMovableObject;
+	string movableObject;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
-		for (std::map<string,string>::iterator itm = _movableMovableObjectsMap->begin(); itm != _movableMovableObjectsMap->end(); ++itm)
+		for (std::map<string,string>::iterator itm = _movableObjectsMap->begin(); itm != _movableObjectsMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				movableMovableObject = itm->second;
+				movableObject = itm->second;
 				itv->clear();
 				break;
 			}
 		}
 	}
 
-	string adjToMovableMovableObject;
+	string adjToMovableObject;
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
-		for (std::map<string, string>::iterator itm = _adjToMovableMovableObjectsMap->begin(); itm != _adjToMovableMovableObjectsMap->end(); ++itm)
+		for (std::map<string, string>::iterator itm = _adjToMovableObjectsMap->begin(); itm != _adjToMovableObjectsMap->end(); ++itm)
 		{
 			if (itv->find(itm->first) != string::npos)
 			{
-				adjToMovableMovableObject = itm->second;
+				adjToMovableObject = itm->second;
 				itv->clear();
 				break;
 			}

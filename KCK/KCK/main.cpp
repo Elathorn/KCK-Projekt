@@ -24,6 +24,7 @@ int main()
 		for (int y = 0; y < 10; y++)
 			cout << mech._map[x][y]->getGridType();
 		cout << endl;
+		mech 
 	}
 
 	getchar();

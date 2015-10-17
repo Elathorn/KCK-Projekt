@@ -19,5 +19,6 @@ private:
 	map<string, string>* _adjToShelvesMap; //mapa przymiotników do pó³ek
 	map<string, string>* _colorOfMovableObjectsMap; //mapa kolorów obiektów
 	map<string, string>* _sizeOfMovableObjectsMap; //mapa wielkoœci obiektów
+	map<string, string>* _lvlOfShelves; //mapa pó³ek
 };
 

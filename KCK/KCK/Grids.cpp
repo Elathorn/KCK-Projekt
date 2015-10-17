@@ -19,7 +19,7 @@ Shelf::Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, Mova
 
 MovableObject * Shelf::getTopShelf()
 {
-	if (_topShelf != nullptr)
+	if (_topShelf == nullptr)
 		return nullptr;
 	else
 		return _topShelf;
@@ -27,7 +27,7 @@ MovableObject * Shelf::getTopShelf()
 
 MovableObject * Shelf::getMidShelf()
 {
-	if (_midShelf != nullptr)
+	if (_midShelf == nullptr)
 		return nullptr;
 	else
 		return _midShelf;
@@ -35,7 +35,7 @@ MovableObject * Shelf::getMidShelf()
 
 MovableObject * Shelf::getBotShelf()
 {
-	if (_botShelf != nullptr)
+	if (_botShelf == nullptr)
 		return nullptr;
 	else
 		return _botShelf;

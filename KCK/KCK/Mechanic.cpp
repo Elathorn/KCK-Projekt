@@ -26,6 +26,14 @@ Mechanic::Mechanic()
 	_map[MAP_X_SIZE-1][MAP_Y_SIZE/2] = shelf;
 	Shelf* shelf2 = dynamic_cast<Shelf*>(shelf);
 	_shelvesVec.push_back(shelf2);
+
+
+	obj = new MovableObject(MAP_X_SIZE - 1, MAP_Y_SIZE / 2, "green", "small");
+	_movableObjectsVec.push_back(obj);
+	shelf = new Shelf(0, MAP_Y_SIZE / 2, NULL, NULL, NULL);
+	_map[0][MAP_Y_SIZE / 2] = shelf;
+	shelf2 = dynamic_cast<Shelf*>(shelf);
+	_shelvesVec.push_back(shelf2);
 	//end of tmp shelves
 }
 

@@ -23,3 +23,4 @@ int Object::move(int newX, int newY)
 		_locationYAxis = newY;
 	return 0;
 }
+

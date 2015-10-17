@@ -1,6 +1,7 @@
 #include "NaturalInterpreter.h"
 #include "IOManager.h"
 #include <algorithm>
+#include "Object.h"
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -127,7 +128,7 @@ int NaturalInterpreter::recognizeOrder(string humanInput)
 			}
 		}
 	}
-
+	
 
 
 	return int(orderFound);

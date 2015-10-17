@@ -12,7 +12,6 @@ public:
 	int recognizeOrder(string humanInput);
 	vector<string>* tokenizer(string input, char separator);
 private:
-
 	map<string, string>* _ordersMap; //mapa wykrywanych rozkazów
 	map<string, string>* _possitiveResponsesMap; //mapa z pozytywnymi odpowiedziami
 	map<string, string>* _shelvesMap; //mapa wykrywanych okreœleñ na pó³kê

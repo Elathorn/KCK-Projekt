@@ -16,11 +16,8 @@ public:
 
 	void moveObject(Shelf*, Object*, char); //przenosi obiekt do wybranej lokalizacji
 
-	
-
 	Grid* _map[MAP_X_SIZE][MAP_Y_SIZE];
 private:
-
 	vector<Object*> _objects;
 	vector<Grid*> _grids;
 	Grid* _emptyGrid;

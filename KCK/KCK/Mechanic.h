@@ -9,6 +9,8 @@ public:
 	Mechanic();
 	~Mechanic();
 
+	void moveObject(Object*, int, int); //przenosi obiekt do wybranej lokalizacji
+
 private:
 	//magic numbers
 	static const int MAP_X_SIZE = 10;

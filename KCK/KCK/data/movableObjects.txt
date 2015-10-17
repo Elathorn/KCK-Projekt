@@ -1,6 +1,6 @@
-pudl
-pudele
-karton
-paczk
-skrzyn
-grat
+pudl;movableObject
+pudele;movableObject
+karton;movableObject
+paczk;movableObject
+skrzyn;movableObject
+grat;movableObject

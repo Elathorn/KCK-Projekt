@@ -1,7 +1,7 @@
 #include "NaturalInterpreter.h"
 #include "IOManager.h"
 #include <algorithm>
-#include "Object.h"
+#include "MovableObject.h"
 #include <vector>
 #include <iostream>
 using namespace std;

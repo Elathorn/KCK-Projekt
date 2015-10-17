@@ -44,7 +44,8 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	if (script->at(order) == "go")
 		if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar))
 			return randomizeAnswer(shelfIsFull);
-		return randomizeAnswer(goOrderDone);
+		else
+			return randomizeAnswer(goOrderDone);
 
 
 	return randomizeAnswer(commandNotUnderstanded);

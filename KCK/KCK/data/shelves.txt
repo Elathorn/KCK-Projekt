@@ -1,3 +1,4 @@
 polk;shelf
 polecz;shelf
 regal;shelf
+szaf;shelf

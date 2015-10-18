@@ -11,8 +11,8 @@ public:
 	~NaturalInterpreter();
 	vector <string> * recognizeOrder(string humanInput);
 	string tokenSearcher(vector <string> * words, map <string, string> * map, string type = "");
-private:
 	vector<string>* tokenizer(string input, char separator);
+private:
 	map<string, string>* _ordersMap; //mapa wykrywanych rozkazów
 	map<string, string>* _possitiveResponsesMap; //mapa z pozytywnymi odpowiedziami
 	map<string, string>* _shelvesMap; //mapa wykrywanych okreœleñ na pó³kê

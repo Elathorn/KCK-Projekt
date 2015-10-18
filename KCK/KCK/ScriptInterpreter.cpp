@@ -6,7 +6,7 @@
 ScriptInterpreter::ScriptInterpreter()
 {
 	_mechanic = new Mechanic(); //tworzenie mechaniki
-	_NI = new NaturalInterpreter(); //i interpretera jêzyka naturalnego
+	_NI = new NaturalInterpreter(); //i interpretera j?zyka naturalnego
 
 	_shelfNotFoundTxt = IOManager::loadVectorFromFile("shelfNotFound.txt");
 	_movableObjNotFoundTxt = IOManager::loadVectorFromFile("movableObjectNotFound.txt");
@@ -20,26 +20,26 @@ ScriptInterpreter::ScriptInterpreter()
 
 ScriptInterpreter::~ScriptInterpreter()
 {
-	
+
 }
 
 string ScriptInterpreter::interpretUserInput(string humanInput)
 {
 	vector<string>* script = _NI->recognizeOrder(humanInput);
 	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject };
-	
-	if (script->at(order) == "");
+
+	if (script->at(order) == "")
 		return randomizeAnswer(commandNotUnderstanded);
 
 	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara
 
 	Shelf* shelf = _mechanic->findShelf(script->at(adjToShelf));
-	if (shelf == NULL) //jeœli nie znaleziono pó³ki
+	if (shelf == NULL) //je?li nie znaleziono pó³ki
 		return randomizeAnswer(shelfNotFound);
 	MovableObject* obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
-	if (obj == NULL) //jeœli nie znaleziono obiektu
+	if (obj == NULL) //je?li nie znaleziono obiektu
 		return randomizeAnswer(movableObjNotFound);
-	if (!lvlOfShelfChar) //jeœli nie istnieje lokalizator konkretnej pó³ki (przegródki)
+	if (!lvlOfShelfChar) //je?li nie istnieje lokalizator konkretnej pó³ki (przegródki)
 		return randomizeAnswer(rackNotFound);
 
 	if (script->at(order) == "go")

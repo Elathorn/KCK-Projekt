@@ -12,6 +12,7 @@ public:
 	~ScriptInterpreter();
 
 	string interpretUserInput(string humanInput);
+	Mechanic* getMechanic() { return _mechanic; }
 
 private:
 	vector<string>* _script;

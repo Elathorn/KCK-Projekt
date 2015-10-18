@@ -56,7 +56,7 @@ void Shelf::setShelf(MovableObject * newObj, char pos)
 {
 	switch (pos)
 	{
-	case (TOP_SHELF) : _topShelf = newObj; break;
+	case (TOP_SHELF) : _topShelf = newObj; break; //todo: zabezpieczenie przed nadpisaniem paczki?
 	case (MID_SHELF) : _midShelf = newObj; break;
 	case (BOT_SHELF) : _botShelf = newObj; break;
 	}

@@ -22,16 +22,16 @@ public:
 	MovableObject* findMovableObject(string color, string size); //wyszukuje pierwszy obiekt o danej charakterystyce, "" dla braku danych
 	Shelf* findShelf(string locationStr);
 
+	Grid* getGrid(int locX, int locY);
 
-	//todo: przenieœæ do private
-	Grid* _map[MAP_X_SIZE][MAP_Y_SIZE];
 private:
+	Grid* _map[MAP_X_SIZE][MAP_Y_SIZE];
 
 	vector<MovableObject*> _movableObjectsVec;
 	vector<Shelf*> _shelvesVec;
 	Grid* _emptyGrid;
 
-
+	void _mapCreator();
 
 };
 

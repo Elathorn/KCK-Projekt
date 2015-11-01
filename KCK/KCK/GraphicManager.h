@@ -11,6 +11,9 @@ public:
 	~GraphicManager();
 
 	void runGraphic(); //todo: grafika, lul
+	static void printCommunicat(string communicat);
+	static string getStringFromUser();
+
 
 private:
 	ScriptInterpreter* _SI;

@@ -45,9 +45,9 @@ MovableObject* Shelf::getShelf(char shelfPos)
 {
 	switch (shelfPos)
 	{
-	case (TOP_SHELF) : return _topShelf;
-	case (MID_SHELF) : return _midShelf;
-	case (BOT_SHELF) : return _botShelf;
+	case (TOP_SHELF) : return getTopShelf();
+	case (MID_SHELF) : return getMidShelf();
+	case (BOT_SHELF) : return getBotShelf();
 	default: return nullptr;
 	}
 }

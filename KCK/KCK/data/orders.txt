@@ -1,6 +1,6 @@
 idz;go
 wez;go
-przeniez;go
+przenie;go
 przewies;go
 jedz;go
 rusz;go

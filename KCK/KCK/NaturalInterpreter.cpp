@@ -2,10 +2,11 @@
 #include "IOManager.h"
 #include <algorithm>
 #include "ErrorHandler.h"
-#include "MovableObject.h"
 #include "Mechanic.h"
 #include <vector>
 #include <iostream>
+#include "ScriptInterpreter.h"
+#include "GraphicManager.h"
 using namespace std;
 
 NaturalInterpreter::NaturalInterpreter()
@@ -56,8 +57,29 @@ vector < string > * NaturalInterpreter::tokenizer(string str, char separator)
 	return temp;
 }
 
-string NaturalInterpreter::tokenSearcher(vector <string> * words, map <string, string> * map, string type)
+string NaturalInterpreter::searchForToken(int enumKeyWordType)
 {
+	string token;
+	vector<string> * tokens;
+	token = GraphicManager::getStringFromUser(); //todo: TO KURWA CA£E //wczytujemy do tokena user input
+	tokens = tokenizer(token, ' '); //todo: magic word na separator //tokenizujemy user input
+	switch (enumKeyWordType)
+	{
+	case (ScriptInterpreter::shelfNotFound) :
+		token = tokenSearcher(tokens, _adjToShelvesMap); break;
+	case (ScriptInterpreter::movableObjNotFound) :
+		token = tokenSearcher(tokens, _movableObjectsMap); break;
+	case (ScriptInterpreter::rackNotFound) :
+		token = tokenSearcher(tokens, _lvlOfShelves); break;
+	case (ScriptInterpreter::commandNotUnderstanded) :
+		token = tokenSearcher(tokens, _ordersMap); break;
+	}
+	return token;
+}
+
+string NaturalInterpreter::tokenSearcher(vector <string> * words, map <string, string> * map) //tu by³ string type
+{
+	string type = "";
 	for (std::vector<string>::iterator itv = words->begin(); itv != words->end(); ++itv)
 	{
 		for (std::map<string, string>::iterator itm = map->begin(); itm != map->end(); ++itm)
@@ -76,7 +98,7 @@ string NaturalInterpreter::tokenSearcher(vector <string> * words, map <string, s
 vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 //Wyszukuje s³owa kluczowe i rozpoznaje dane: rozkaz, miejsce szafki, pó³ka szafki, kolor paczki, rozmiar paczki
 {
-	vector <string> * words = tokenizer(humanInput, ' ');
+	vector <string> * words = tokenizer(humanInput, ' '); //todo: przerzuiæ wskaŸnik/zapobiec wyciekowi pamiêci
 
 	vector <string> * interpretation = new vector <string>();
 	interpretation->push_back(tokenSearcher(words, _ordersMap));
@@ -84,6 +106,5 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 	interpretation->push_back(tokenSearcher(words, _lvlOfShelves));
 	interpretation->push_back(tokenSearcher(words, _colorOfMovableObjectsMap));
 	interpretation->push_back(tokenSearcher(words, _sizeOfMovableObjectsMap));
-	
 	return interpretation;
 }

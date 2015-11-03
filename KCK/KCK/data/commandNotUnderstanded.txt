@@ -1,6 +1,6 @@
-Nie rozumiem.
-Nie wiem o co chodzi.
-Mo¿esz jasniej?
-Cos mi tu nie gra, sprobuj jeszcze raz.
+Nie rozumiem rozkazu.
+Nie wiem o co chodzi. Co mam zrobic?
+Mo¿esz jasniej? Co dokladnie mam zrobic?
+Cos mi tu nie gra, powtorz polecenie.
 Hej, powoli i wyraznie. Co mam zrobic?
 Mhm, mhm, mhm... No a teraz do rzeczy - co jest do zrobienia?

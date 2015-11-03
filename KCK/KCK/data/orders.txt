@@ -4,3 +4,5 @@ przenie;go
 przewies;go
 jedz;go
 rusz;go
+zabierz;go
+zanies;go

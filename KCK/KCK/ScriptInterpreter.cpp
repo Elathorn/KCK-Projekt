@@ -41,7 +41,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 
 		}
 		shelf = _mechanic->findShelf(script->at(adjToShelf));
-		if (shelf == NULL) //je?li nie znaleziono p�ki
+		if (shelf == NULL) //je?li nie znaleziono pó³ki
 		{
 			GraphicManager::printCommunicat(randomizeAnswer(shelfNotFound)); 
 			script->at(adjToShelf) = _NI->searchForToken(shelfNotFound);
@@ -51,10 +51,10 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 		if (obj == NULL) //je?li nie znaleziono obiektu
 		{
 			GraphicManager::printCommunicat(randomizeAnswer(movableObjNotFound));
-			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn��
+			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
 			commandComplete = false;
 		}
-		if (script->at(lvlOfShelf) == "") //je?li nie istnieje lokalizator konkretnej p�ki (przegr�dki)
+		if (script->at(lvlOfShelf) == "") //je?li nie istnieje lokalizator konkretnej pó³ki (przegródki)
 		{
 			GraphicManager::printCommunicat(randomizeAnswer(rackNotFound)); 
 			(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
@@ -63,11 +63,23 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	}
 
 	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara - todo: cos nie tak
+	MovableObject* test = NULL;
+	switch (lvlOfShelfChar)
+	{
+	case ('t') :
+		test = (_mechanic->findShelf(script->at(adjToShelf))->getTopShelf()); break;
+	case ('m') :
+		test = (_mechanic->findShelf(script->at(adjToShelf))->getMidShelf()); break;
+	case ('b') :
+		test = (_mechanic->findShelf(script->at(adjToShelf))->getBotShelf()); break;
+	}
 
 	if (script->at(order) == "go")
-		if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar))
+		if (_mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject)) == test)
+			return randomizeAnswer(goOrderDone); //TODO: KOMUNIKATY OD TEGO, ŻE COŚ JEST JUŻ NA SWOIM MIEJSCU - WCZESNIEJ POKAZYWAŁO ŻE PÓŁKA PEŁNA
+		else if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar))
 			return randomizeAnswer(shelfIsFull);
-		else
+		else 
 			return randomizeAnswer(goOrderDone);
 
 	return randomizeAnswer(commandNotUnderstanded);

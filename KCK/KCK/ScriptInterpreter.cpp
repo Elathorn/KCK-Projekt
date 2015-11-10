@@ -6,7 +6,7 @@
 ScriptInterpreter::ScriptInterpreter()
 {
 	_mechanic = new Mechanic(); //tworzenie mechaniki
-	_NI = new NaturalInterpreter(); //i interpretera j?zyka naturalnego
+	_NI = new NaturalInterpreter(); //i interpretera jezyka naturalnego
 
 	_shelfNotFoundTxt = IOManager::loadVectorFromFile("shelfNotFound.txt");
 	_movableObjNotFoundTxt = IOManager::loadVectorFromFile("movableObjectNotFound.txt");
@@ -14,7 +14,7 @@ ScriptInterpreter::ScriptInterpreter()
 	_commandNotUnderstandedTxt = IOManager::loadVectorFromFile("commandNotUnderstanded.txt");
 	_goOrderDoneTxt = IOManager::loadVectorFromFile("goOrderDone.txt");
 	_rackNotFoundTxt = IOManager::loadVectorFromFile("rackNotFound.txt");
-
+	_objectIsActuallyHereTxt = IOManager::loadVectorFromFile("objectIsActuallyHere.txt");
 	srand(time(NULL));
 }
 
@@ -54,7 +54,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
 			commandComplete = false;
 		}
-		if (script->at(lvlOfShelf) == "") //je?li nie istnieje lokalizator konkretnej pó³ki (przegródki)
+		if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
 		{
 			GraphicManager::printCommunicat(randomizeAnswer(rackNotFound)); 
 			(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
@@ -63,26 +63,18 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	}
 
 	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara - todo: cos nie tak
-	MovableObject* test = NULL;
-	switch (lvlOfShelfChar)
-	{
-	case ('t') :
-		test = (_mechanic->findShelf(script->at(adjToShelf))->getTopShelf()); break;
-	case ('m') :
-		test = (_mechanic->findShelf(script->at(adjToShelf))->getMidShelf()); break;
-	case ('b') :
-		test = (_mechanic->findShelf(script->at(adjToShelf))->getBotShelf()); break;
-	}
+	MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
+
 
 	if (script->at(order) == "go")
-		if (_mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject)) == test)
-			return randomizeAnswer(goOrderDone); //TODO: KOMUNIKATY OD TEGO, ŻE COŚ JEST JUŻ NA SWOIM MIEJSCU - WCZESNIEJ POKAZYWAŁO ŻE PÓŁKA PEŁNA
-		else if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar))
+		if (objAtTargetShelf == obj) //jesli ten obiekt jest juz na tej polce
+			return randomizeAnswer(objectIsActuallyHere); //informujemy o tym uzytkownika
+		else if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar)) //jezeli NIE udalo sie przeniesc obiektu (pelna polka)
 			return randomizeAnswer(shelfIsFull);
-		else 
+		else  //inaczej jesli sie udalo
 			return randomizeAnswer(goOrderDone);
 
-	return randomizeAnswer(commandNotUnderstanded);
+	return randomizeAnswer(commandNotUnderstanded); //todo: wrzucic to do petli dialogowania
 }
 
 string ScriptInterpreter::randomizeAnswer(int enumInt)
@@ -95,6 +87,7 @@ string ScriptInterpreter::randomizeAnswer(int enumInt)
 	case (commandNotUnderstanded) : return _commandNotUnderstandedTxt->at(randomNumber(_commandNotUnderstandedTxt->size()));break;
 	case (goOrderDone) : return _goOrderDoneTxt->at(randomNumber(_goOrderDoneTxt->size())); break;
 	case (rackNotFound) : return _rackNotFoundTxt->at(randomNumber(_rackNotFoundTxt->size())); break;
+	case (objectIsActuallyHere) : return _objectIsActuallyHereTxt->at(randomNumber(_objectIsActuallyHereTxt->size())); break;
 	}
 
 }

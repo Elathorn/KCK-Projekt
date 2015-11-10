@@ -1,0 +1,23 @@
+//////////////////
+//Projekt KCK
+//G³azik Micha³
+//Hliwa Kamil
+//R¹czkiewicz Bartosz 
+//
+//Wózek wid³owy
+//////////////////
+
+#include "GraphicManager.h"
+
+using namespace std;
+
+
+int main()
+{
+	GraphicManager* GM = new GraphicManager();
+	GM->runGraphic();
+
+	getchar();
+	return 0; 
+}
+

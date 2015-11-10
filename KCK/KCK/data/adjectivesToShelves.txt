@@ -1,0 +1,6 @@
+wscho;east
+zachod;west
+polnoc;north
+poludni;south
+lew;west
+praw;east

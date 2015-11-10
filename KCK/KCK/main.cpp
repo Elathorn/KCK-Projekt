@@ -2,7 +2,6 @@
 //Projekt KCK
 //G³azik Micha³
 //Hliwa Kamil
-//R¹czkiewicz Bartosz 
 //
 //Wózek wid³owy
 //////////////////

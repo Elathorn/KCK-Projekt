@@ -18,7 +18,7 @@ void GraphicManager::runGraphic()
 
 	for (;;)
 	{
-		//* pêtla pokazuj¹ca rozmieszczenie pó³ek
+		/* pêtla pokazuj¹ca rozmieszczenie pó³ek
 		for (int x = Mechanic::MAP_X_SIZE - 1; x >= 0; x--)
 		{
 			for (int y = 0; y < Mechanic::MAP_Y_SIZE; y++)
@@ -26,8 +26,7 @@ void GraphicManager::runGraphic()
 				cout << _mech->getGrid(x, y)->getGridType();
 			}
 			cout << endl;
-		}
-		//*/
+		}*/
 		//cout << endl;
 		cout << "Shelf: Top/Mid/Bottom" << endl;
 		//WEST
@@ -36,68 +35,68 @@ void GraphicManager::runGraphic()
 		if (sh->getTopShelf())
 			cout << sh->getTopShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getMidShelf())
 			cout << sh->getMidShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getBotShelf())
 			cout << sh->getBotShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		//EAST
 		cout << endl << "East: ";
 		sh = _mech->findShelf("east");
 		if (sh->getTopShelf())
 			cout << sh->getTopShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getMidShelf())
 			cout << sh->getMidShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getBotShelf())
 			cout << sh->getBotShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		//NORTH
 		cout << endl << "North: ";
 		sh = _mech->findShelf("north");
 		if (sh->getTopShelf())
 			cout << sh->getTopShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getMidShelf())
 			cout << sh->getMidShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getBotShelf())
 			cout << sh->getBotShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		//SOUTH
 		cout << endl << "South: ";
 		sh = _mech->findShelf("south");
 		if (sh->getTopShelf())
 			cout << sh->getTopShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getMidShelf())
 			cout << sh->getMidShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << "/";
 		if (sh->getBotShelf())
 			cout << sh->getBotShelf()->getColor();
 		else
-			cout << "NULL";
+			cout << "0";
 		cout << endl;
 		cout << "Podaj polecenie: ";
 		string humanInput;
@@ -106,4 +105,16 @@ void GraphicManager::runGraphic()
 		cout << endl << endl;
 	}
 	
+}
+
+void GraphicManager::printCommunicat(string communicat)
+{
+	cout << endl << communicat << endl;
+}
+
+string GraphicManager::getStringFromUser()
+{
+	string humanInput;
+	getline(cin, humanInput);
+	return humanInput;
 }

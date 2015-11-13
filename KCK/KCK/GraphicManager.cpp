@@ -107,7 +107,7 @@ void GraphicManager::runGraphic()
 	
 }
 
-void GraphicManager::printCommunicat(string communicat)
+void GraphicManager::printCommunicate(string communicat)
 {
 	cout << endl << communicat << endl;
 }

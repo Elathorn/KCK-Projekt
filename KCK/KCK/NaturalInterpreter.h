@@ -24,5 +24,7 @@ private:
 	map<string, string>* _colorOfMovableObjectsMap; //mapa kolorów obiektów
 	map<string, string>* _sizeOfMovableObjectsMap; //mapa wielkoœci obiektów
 	map<string, string>* _lvlOfShelves; //mapa pó³ek
+
+	const char _separator = ' ';
 };
 

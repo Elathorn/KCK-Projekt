@@ -35,7 +35,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 		commandComplete = true;
 		if (script->at(order) == "")
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(commandNotUnderstanded)); //todo: metoda
+			GraphicManager::printCommunicate(randomizeAnswer(commandNotUnderstanded));
 			script->at(order) = _NI->searchForToken(commandNotUnderstanded);
 			commandComplete = false;
 
@@ -43,30 +43,32 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 		shelf = _mechanic->findShelf(script->at(adjToShelf));
 		if (shelf == NULL) //je?li nie znaleziono pó³ki
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(shelfNotFound)); 
+			GraphicManager::printCommunicate(randomizeAnswer(shelfNotFound)); 
 			script->at(adjToShelf) = _NI->searchForToken(shelfNotFound);
 			commandComplete = false;
 		}
 		obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
 		if (obj == NULL) //je?li nie znaleziono obiektu
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(movableObjNotFound));
+			GraphicManager::printCommunicate(randomizeAnswer(movableObjNotFound));
 			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
 			commandComplete = false;
 		}
 		if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(rackNotFound)); 
+			GraphicManager::printCommunicate(randomizeAnswer(rackNotFound)); 
 			(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
 			commandComplete = false;
 		}
 	}
 
-	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara - todo: cos nie tak
+	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara (wszystko działa)
+	string orderStr = (*script)[order];
+	delete script;
 	MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
 
 
-	if (script->at(order) == "go")
+	if (orderStr == "go")
 		if (objAtTargetShelf == obj) //jesli ten obiekt jest juz na tej polce
 			return randomizeAnswer(objectIsActuallyHere); //informujemy o tym uzytkownika
 		else if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar)) //jezeli NIE udalo sie przeniesc obiektu (pelna polka)

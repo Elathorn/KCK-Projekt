@@ -1,6 +1,7 @@
 #include "IOManager.h"
 
 const string IOManager::DATA_FILES_LOCATION = "data/";
+const string IOManager::GRAPHICS_FILES_LOCATION = "graphics/";
 
 vector<string>* IOManager::loadVectorFromFile(string fileName)
 {
@@ -45,4 +46,16 @@ map<string, string>* IOManager::loadMapFromFile(string fileName)
 	}
 
 	return nullptr;
+}
+
+sf::Sprite* IOManager::loadSpriteFromFile(string fileName)
+{
+	string location = GRAPHICS_FILES_LOCATION + fileName;
+	location = location.c_str();
+	sf::Sprite* sprite;
+	sf::Texture texture;
+	texture.loadFromFile(location);
+	sprite = new sf::Sprite;
+	sprite->setTexture(texture);
+	return sprite;
 }

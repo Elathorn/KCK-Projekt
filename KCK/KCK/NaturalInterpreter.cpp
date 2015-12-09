@@ -61,8 +61,8 @@ string NaturalInterpreter::searchForToken(int enumKeyWordType)
 {
 	string token;
 	vector<string> * tokens;
-	token = GraphicManager::getStringFromUser(); //todo: TO KURWA CA£E //wczytujemy do tokena user input
-	tokens = tokenizer(token, ' '); //todo: magic word na separator //tokenizujemy user input
+	token = GraphicManager::getStringFromUser(); //wczytujemy do tokena user input
+	tokens = tokenizer(token, _separator); //tokenizujemy user input
 	switch (enumKeyWordType)
 	{
 	case (ScriptInterpreter::shelfNotFound) :
@@ -98,7 +98,7 @@ string NaturalInterpreter::tokenSearcher(vector <string> * words, map <string, s
 vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 //Wyszukuje s³owa kluczowe i rozpoznaje dane: rozkaz, miejsce szafki, pó³ka szafki, kolor paczki, rozmiar paczki
 {
-	vector <string> * words = tokenizer(humanInput, ' '); //todo: przerzuiæ wskaŸnik/zapobiec wyciekowi pamiêci
+	vector <string> * words = tokenizer(humanInput, _separator); 
 
 	vector <string> * interpretation = new vector <string>();
 	interpretation->push_back(tokenSearcher(words, _ordersMap));
@@ -106,5 +106,6 @@ vector <string> * NaturalInterpreter::recognizeOrder(string humanInput)
 	interpretation->push_back(tokenSearcher(words, _lvlOfShelves));
 	interpretation->push_back(tokenSearcher(words, _colorOfMovableObjectsMap));
 	interpretation->push_back(tokenSearcher(words, _sizeOfMovableObjectsMap));
+	delete words;
 	return interpretation;
 }

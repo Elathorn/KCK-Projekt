@@ -4,7 +4,6 @@
 
 Logger::Logger()
 {
-	//todo: try catch
 	_logOutput.open("log.txt");
 }
 

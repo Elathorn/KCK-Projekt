@@ -16,7 +16,7 @@ public:
 	string interpretUserInput(string humanInput);
 	Mechanic* getMechanic() { return _mechanic; }
 
-	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded, rackNotFound };
+	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded, rackNotFound, objectIsActuallyHere };
 private:
 	vector<string>* _script;
 	Mechanic* _mechanic;
@@ -27,6 +27,7 @@ private:
 	vector<string>* _commandNotUnderstandedTxt;
 	vector<string>* _goOrderDoneTxt;
 	vector<string>* _rackNotFoundTxt;
+	vector<string>* _objectIsActuallyHereTxt;
 
 
 private:

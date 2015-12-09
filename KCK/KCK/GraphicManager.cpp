@@ -33,7 +33,7 @@ void GraphicManager::runGraphic()
 	_window->display();
 }
 
-void GraphicManager::printCommunicat(string communicat)
+void GraphicManager::printCommunicate(string communicat)
 {
 	cout << endl << communicat << endl;
 }

@@ -6,7 +6,7 @@
 ScriptInterpreter::ScriptInterpreter()
 {
 	_mechanic = new Mechanic(); //tworzenie mechaniki
-	_NI = new NaturalInterpreter(); //i interpretera j?zyka naturalnego
+	_NI = new NaturalInterpreter(); //i interpretera jezyka naturalnego
 
 	_shelfNotFoundTxt = IOManager::loadVectorFromFile("shelfNotFound.txt");
 	_movableObjNotFoundTxt = IOManager::loadVectorFromFile("movableObjectNotFound.txt");
@@ -14,7 +14,7 @@ ScriptInterpreter::ScriptInterpreter()
 	_commandNotUnderstandedTxt = IOManager::loadVectorFromFile("commandNotUnderstanded.txt");
 	_goOrderDoneTxt = IOManager::loadVectorFromFile("goOrderDone.txt");
 	_rackNotFoundTxt = IOManager::loadVectorFromFile("rackNotFound.txt");
-
+	_objectIsActuallyHereTxt = IOManager::loadVectorFromFile("objectIsActuallyHere.txt");
 	srand(time(NULL));
 }
 
@@ -35,42 +35,48 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 		commandComplete = true;
 		if (script->at(order) == "")
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(commandNotUnderstanded)); //todo: metoda
+			GraphicManager::printCommunicate(randomizeAnswer(commandNotUnderstanded));
 			script->at(order) = _NI->searchForToken(commandNotUnderstanded);
 			commandComplete = false;
 
 		}
 		shelf = _mechanic->findShelf(script->at(adjToShelf));
-		if (shelf == NULL) //je?li nie znaleziono pó³ki
+		if (shelf == NULL) //je?li nie znaleziono pÃ³Â³ki
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(shelfNotFound)); 
+			GraphicManager::printCommunicate(randomizeAnswer(shelfNotFound)); 
 			script->at(adjToShelf) = _NI->searchForToken(shelfNotFound);
 			commandComplete = false;
 		}
 		obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
 		if (obj == NULL) //je?li nie znaleziono obiektu
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(movableObjNotFound));
-			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
+			GraphicManager::printCommunicate(randomizeAnswer(movableObjNotFound));
+			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarnÂ¹Ã¦
 			commandComplete = false;
 		}
-		if (script->at(lvlOfShelf) == "") //je?li nie istnieje lokalizator konkretnej pó³ki (przegródki)
+		if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
 		{
-			GraphicManager::printCommunicat(randomizeAnswer(rackNotFound)); 
+			GraphicManager::printCommunicate(randomizeAnswer(rackNotFound)); 
 			(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
 			commandComplete = false;
 		}
 	}
 
-	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara - todo: cos nie tak
+	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara (wszystko dziaÅ‚a)
+	string orderStr = (*script)[order];
+	delete script;
+	MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
 
-	if (script->at(order) == "go")
-		if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar))
+
+	if (orderStr == "go")
+		if (objAtTargetShelf == obj) //jesli ten obiekt jest juz na tej polce
+			return randomizeAnswer(objectIsActuallyHere); //informujemy o tym uzytkownika
+		else if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar)) //jezeli NIE udalo sie przeniesc obiektu (pelna polka)
 			return randomizeAnswer(shelfIsFull);
-		else
+		else  //inaczej jesli sie udalo
 			return randomizeAnswer(goOrderDone);
 
-	return randomizeAnswer(commandNotUnderstanded);
+	return randomizeAnswer(commandNotUnderstanded); //todo: wrzucic to do petli dialogowania
 }
 
 string ScriptInterpreter::randomizeAnswer(int enumInt)
@@ -83,6 +89,7 @@ string ScriptInterpreter::randomizeAnswer(int enumInt)
 	case (commandNotUnderstanded) : return _commandNotUnderstandedTxt->at(randomNumber(_commandNotUnderstandedTxt->size()));break;
 	case (goOrderDone) : return _goOrderDoneTxt->at(randomNumber(_goOrderDoneTxt->size())); break;
 	case (rackNotFound) : return _rackNotFoundTxt->at(randomNumber(_rackNotFoundTxt->size())); break;
+	case (objectIsActuallyHere) : return _objectIsActuallyHereTxt->at(randomNumber(_objectIsActuallyHereTxt->size())); break;
 	}
 
 }

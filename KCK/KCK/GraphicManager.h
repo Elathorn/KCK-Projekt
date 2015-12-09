@@ -15,7 +15,7 @@ public:
 	~GraphicManager();
 
 	void runGraphic(); //todo: grafika, lul
-	static void printCommunicat(string communicat);
+	static void printCommunicate(string communicat);
 	static string getStringFromUser();
 
 	

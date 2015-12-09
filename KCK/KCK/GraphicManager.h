@@ -1,9 +1,13 @@
 #pragma once
+#include "GraphicManager.h"
+#include "GraphicObject.h"
 #include <iostream>
 #include <string>
+#include <vector>
 #include "ScriptInterpreter.h"
+#include "GraphicsConfig.h"
 using namespace std;
-
+using namespace sf;
 class GraphicManager
 {
 public:
@@ -14,9 +18,17 @@ public:
 	static void printCommunicat(string communicat);
 	static string getStringFromUser();
 
+	
 
 private:
 	ScriptInterpreter* _SI;
 	Mechanic* _mech; //todo: zmieniæ to jakoœ?
+	RenderWindow* _window;
+	
+
+	void createWindow(int Xsize, int Ysize);
+
+	void printObjectsFromVector(RenderWindow& window, Event event, vector<GraphicObject> vec);
+
 };
 

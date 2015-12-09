@@ -1,6 +1,6 @@
 #pragma once
 #include "GraphicManager.h"
-#include "GraphicObject.h"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -28,7 +28,7 @@ private:
 
 	void createWindow(int Xsize, int Ysize);
 
-	void printObjectsFromVector(RenderWindow& window, Event event, vector<GraphicObject> vec);
+	void drawShelves();
 
 };
 

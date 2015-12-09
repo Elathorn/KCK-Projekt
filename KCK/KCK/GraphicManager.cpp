@@ -24,13 +24,13 @@ void GraphicManager::runGraphic()
 			if (event.type == Event::Closed)
 				_window->close();
 		}
+		//czyszczenie
+		_window->clear();
+		//rysowanie
+		drawShelves();
+		//wyswietlanie
+		_window->display();
 	}
-	//czyszczenie
-	_window->clear();
-	//rysowanie
-
-	//wyswietlanie
-	_window->display();
 }
 
 void GraphicManager::printCommunicate(string communicat)
@@ -50,11 +50,13 @@ void GraphicManager::createWindow(int Xsize, int Ysize)
 	_window = new RenderWindow(VideoMode(Xsize, Ysize), "KCK");
 }
 
-void GraphicManager::printObjectsFromVector(RenderWindow & window, Event event, vector<GraphicObject> vec)
+void GraphicManager::drawShelves()
 {
-	for (vector<GraphicObject>::iterator it = vec.begin(); it != vec.end(); ++it) //iterujemy przez caly vector
+	vector<Shelf*> vec = _mech->getShelvesVec();
+	for (vector<Shelf*>::iterator it = vec.begin(); it != vec.end(); ++it) //iterujemy przez caly vector
 	{
 		Sprite* sprite = (*it)->getSprite();
+		_window->draw(*sprite);
 	}
 }
 

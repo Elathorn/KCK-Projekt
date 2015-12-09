@@ -3,7 +3,7 @@
 #include <SFML\Graphics.hpp>
 using namespace std;
 
-class MovableObject
+class MovableObject 
 {
 public:
 	MovableObject(int posX, int posY, string color, string size);

@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 
-class Grid
+class Grid 
 {
 public:
 	Grid();
@@ -12,6 +12,7 @@ public:
 //	int getLocationXAxis() { return _locationXAxis; }
 //	int getLocationYAxis() { return _locationYAxis; }
 	virtual char getGridType() { return GRID_TYPE; }
+	virtual sf::Sprite* getSprite() { return NULL; }
 	//magic words
 	static const char GRID_TYPE = 'g';
 private:
@@ -19,7 +20,7 @@ private:
 };
 
 
-class Shelf : public Grid
+class Shelf : public Grid 
 {
 public:
 	Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf);
@@ -59,5 +60,7 @@ private:
 	MovableObject* _botShelf;
 	int _locationXAxis;
 	int _locationYAxis;
+
+	void setSpritePositionOnWindow(); //ustawia pozycje na ekranie glownym ze wzgledu na pozycje geograficzna
 };
 

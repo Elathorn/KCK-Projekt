@@ -83,9 +83,11 @@ char Shelf::searchShelves(MovableObject * obj)
 
 void Shelf::setSpritePositionOnWindow()
 {
-	_sprite->setOrigin(30, 15);
-	_sprite->setPosition(_locationXAxis * GRID_TO_WINDOW_RATIO //- _sprite->getGlobalBounds().width / 2
-		,_locationYAxis * GRID_TO_WINDOW_RATIO);//- _sprite->getGlobalBounds().width/2);
+	_sprite->setOrigin(_sprite->getTexture()->getSize().x/2, _sprite->getTexture()->getSize().y/2);
+	
+
+	_sprite->setPosition(_locationXAxis * GRID_TO_WINDOW_RATIO + _sprite->getGlobalBounds().width/4
+		,_locationYAxis * GRID_TO_WINDOW_RATIO + _sprite->getGlobalBounds().height/2);
 
 	//ustalenie rotacji
 	enum locationGeo { NORTH = 0, EAST, SOUTH, WEST };

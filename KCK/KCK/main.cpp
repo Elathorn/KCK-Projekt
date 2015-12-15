@@ -16,7 +16,6 @@ int main()
 	GraphicManager* GM = new GraphicManager();
 	GM->runGraphic();
 
-	getchar();
 	return 0; 
 }
 

@@ -9,8 +9,8 @@ class Mechanic
 {
 public:
 	//magic numbers
-	static const int MAP_X_SIZE = 10;
-	static const int MAP_Y_SIZE = 10;
+	static const int MAP_X_SIZE = 11;
+	static const int MAP_Y_SIZE = 11;
 
 	static const int SHELF_IS_FULL = 1;
 	//
@@ -23,6 +23,7 @@ public:
 	Shelf* findShelf(string locationStr);
 
 	Grid* getGrid(int locX, int locY);
+	vector<Shelf*> getShelvesVec() { return _shelvesVec; }
 
 private:
 	Grid* _map[MAP_X_SIZE][MAP_Y_SIZE];

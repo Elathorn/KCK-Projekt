@@ -1,7 +1,9 @@
 #pragma once
 #include "MovableObject.h"
+#include <SFML/Graphics.hpp>
 
-class Grid
+
+class Grid 
 {
 public:
 	Grid();
@@ -10,15 +12,15 @@ public:
 //	int getLocationXAxis() { return _locationXAxis; }
 //	int getLocationYAxis() { return _locationYAxis; }
 	virtual char getGridType() { return GRID_TYPE; }
-
+	virtual sf::Sprite* getSprite() { return NULL; }
 	//magic words
 	static const char GRID_TYPE = 'g';
-protected:
+private:
 	
 };
 
 
-class Shelf : public Grid
+class Shelf : public Grid 
 {
 public:
 	Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf);
@@ -29,6 +31,8 @@ public:
 	MovableObject* getMidShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
 	MovableObject* getBotShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
 	MovableObject* getShelf(char); //zwraca zawartoœæ wybranej pó³ki
+	void setSprite(sf::Sprite * newSprite) { _sprite = newSprite; }
+	sf::Sprite* getSprite() { return _sprite; }
 
 	void setShelf(MovableObject*, char); //zmienia zawartoœæ wybranej pó³ki
 	void setTopShelf(MovableObject* newShelf) { _topShelf = newShelf; } //zmienia zawartoœæ danej pó³ki
@@ -50,10 +54,13 @@ public:
 	static const char BOT_SHELF = 'b';
 	static const char NO_SHELF = 'n';
 private:
+	sf::Sprite * _sprite = NULL;
 	MovableObject* _topShelf;
 	MovableObject* _midShelf;
 	MovableObject* _botShelf;
 	int _locationXAxis;
 	int _locationYAxis;
+
+	void setSpritePositionOnWindow(); //ustawia pozycje na ekranie glownym ze wzgledu na pozycje geograficzna
 };
 

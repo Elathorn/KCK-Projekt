@@ -1,5 +1,8 @@
 #include "Grids.h"
+#include "IOManager.h"
 
+#define GRID_TO_WINDOW_RATIO 45
+#define SHELF_SCALE_RATIO 0.1
 
 Grid::Grid()
 {
@@ -13,6 +16,11 @@ Shelf::Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, Mova
 	_topShelf = topShelf;
 	_midShelf = midShelf;
 	_botShelf = botShelf;
+
+	//@todo : zmieniæ to ³adnie wszystko
+	_sprite = IOManager::loadSpriteFromFile("shelftopdown.png");
+	_sprite->scale(SHELF_SCALE_RATIO, SHELF_SCALE_RATIO);
+	setSpritePositionOnWindow();
 }
 
 
@@ -71,5 +79,29 @@ char Shelf::searchShelves(MovableObject * obj)
 	if (_botShelf == obj)
 		return BOT_SHELF;
 	return NO_SHELF;
+}
+
+void Shelf::setSpritePositionOnWindow()
+{
+	_sprite->setOrigin(_sprite->getTexture()->getSize().x/2, _sprite->getTexture()->getSize().y/2);
+	
+
+	_sprite->setPosition(_locationXAxis * GRID_TO_WINDOW_RATIO + _sprite->getGlobalBounds().width/4
+		,_locationYAxis * GRID_TO_WINDOW_RATIO + _sprite->getGlobalBounds().height/2);
+
+	//ustalenie rotacji
+	enum locationGeo { NORTH = 0, EAST, SOUTH, WEST };
+	int rotation; 
+	//@todo: zrobic to sensownie
+	if (_locationYAxis < 1)
+		rotation = NORTH;
+	else if (_locationYAxis > 8)
+		rotation = SOUTH;
+	else if (_locationXAxis < 3)
+		rotation = WEST;
+	else rotation = EAST;
+
+	
+	_sprite->setRotation(rotation * 90);
 }
 

@@ -6,6 +6,7 @@ GraphicManager::GraphicManager()
 {
 	_SI = new ScriptInterpreter();
 	_mech = _SI->getMechanic();
+	createWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 
@@ -14,97 +15,22 @@ GraphicManager::~GraphicManager()
 }
 
 void GraphicManager::runGraphic()
-{ //WSZYSTKO PONI¯EJ TYMCZASOWE I DO PRZENIESIENIA NA GRAFIKE, JEDYNE ZASTOSOWANIE TO TESTY AKTUALNEJ WERSJI!
-
-	for (;;)
+{ 
+	while (_window->isOpen())
 	{
-		/* pêtla pokazuj¹ca rozmieszczenie pó³ek
-		for (int x = Mechanic::MAP_X_SIZE - 1; x >= 0; x--)
+		Event event;
+		while (_window->pollEvent(event))
 		{
-			for (int y = 0; y < Mechanic::MAP_Y_SIZE; y++)
-			{
-				cout << _mech->getGrid(x, y)->getGridType();
-			}
-			cout << endl;
-		}*/
-		//cout << endl;
-		cout << "Shelf: Top/Mid/Bottom" << endl;
-		//WEST
-		cout << "West: ";
-		Shelf* sh = _mech->findShelf("west");
-		if (sh->getTopShelf())
-			cout << sh->getTopShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getMidShelf())
-			cout << sh->getMidShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getBotShelf())
-			cout << sh->getBotShelf()->getColor();
-		else
-			cout << "0";
-		//EAST
-		cout << endl << "East: ";
-		sh = _mech->findShelf("east");
-		if (sh->getTopShelf())
-			cout << sh->getTopShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getMidShelf())
-			cout << sh->getMidShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getBotShelf())
-			cout << sh->getBotShelf()->getColor();
-		else
-			cout << "0";
-		//NORTH
-		cout << endl << "North: ";
-		sh = _mech->findShelf("north");
-		if (sh->getTopShelf())
-			cout << sh->getTopShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getMidShelf())
-			cout << sh->getMidShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getBotShelf())
-			cout << sh->getBotShelf()->getColor();
-		else
-			cout << "0";
-		//SOUTH
-		cout << endl << "South: ";
-		sh = _mech->findShelf("south");
-		if (sh->getTopShelf())
-			cout << sh->getTopShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getMidShelf())
-			cout << sh->getMidShelf()->getColor();
-		else
-			cout << "0";
-		cout << "/";
-		if (sh->getBotShelf())
-			cout << sh->getBotShelf()->getColor();
-		else
-			cout << "0";
-		cout << endl;
-		cout << "Podaj polecenie: ";
-		string humanInput;
-		getline(cin, humanInput);
-		cout << _SI->interpretUserInput(humanInput);
-		cout << endl << endl;
+			if (event.type == Event::Closed)
+				_window->close();
+		}
+		//czyszczenie
+		_window->clear();
+		//rysowanie
+		drawShelves();
+		//wyswietlanie
+		_window->display();
 	}
-	
 }
 
 void GraphicManager::printCommunicate(string communicat)
@@ -118,3 +44,19 @@ string GraphicManager::getStringFromUser()
 	getline(cin, humanInput);
 	return humanInput;
 }
+
+void GraphicManager::createWindow(int Xsize, int Ysize)
+{
+	_window = new RenderWindow(VideoMode(Xsize, Ysize), "KCK");
+}
+
+void GraphicManager::drawShelves()
+{
+	vector<Shelf*> vec = _mech->getShelvesVec();
+	for (vector<Shelf*>::iterator it = vec.begin(); it != vec.end(); ++it) //iterujemy przez caly vector
+	{
+		Sprite* sprite = (*it)->getSprite();
+		_window->draw(*sprite);
+	}
+}
+

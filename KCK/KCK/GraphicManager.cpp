@@ -48,6 +48,7 @@ string GraphicManager::getStringFromUser()
 void GraphicManager::createWindow(int Xsize, int Ysize)
 {
 	_window = new RenderWindow(VideoMode(Xsize, Ysize), "KCK");
+	_window->setFramerateLimit(60);
 }
 
 void GraphicManager::drawShelves()

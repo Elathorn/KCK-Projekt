@@ -12,7 +12,7 @@ class IOManager
 public:
 	static vector<string>* loadVectorFromFile(string); //wczytuje liste z pliku o okreslonej nazwie i zwraca wskaünik
 	static map<string, string>* loadMapFromFile(string);
-	static sf::Sprite* loadSpriteFromFile(string);
+	static sf::Texture* loadSpriteFromFile(string);
 private:
 
 public: //magic numbers

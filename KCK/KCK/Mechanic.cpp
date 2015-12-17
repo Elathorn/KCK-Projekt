@@ -51,12 +51,12 @@ Shelf * Mechanic::findShelf(string locationStr)
 	int locationX, locationY;
 	if (locationStr == "north") //jeœli lokalizacja to pó³noc
 	{
-		locationY = MAP_Y_SIZE-1; //to ustawiamy jej wartoœæ
+		locationY = 0; //to ustawiamy jej wartoœæ
 		locationX = MAP_X_SIZE / 2; //atm wartoœci s¹ sta³e w stosunku do mapy
 	}
 	else if (locationStr == "south")
 	{
-		locationY = 0;
+		locationY = MAP_Y_SIZE - 1;
 		locationX = MAP_X_SIZE / 2;
 	}
 	else if (locationStr == "east")

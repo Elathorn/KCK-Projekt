@@ -1,11 +1,10 @@
 #pragma once
-#include "GraphicManager.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
-#include <vector>
 #include "ScriptInterpreter.h"
-#include "GraphicsConfig.h"
+#include "TopView.h"
+#include "FrontView.h"
 using namespace std;
 using namespace sf;
 class GraphicManager
@@ -24,11 +23,15 @@ private:
 	ScriptInterpreter* _SI;
 	Mechanic* _mech; //todo: zmieniæ to jakoœ?
 	RenderWindow* _window;
-	
-
+	TopView* _topView;
+	FrontView* _frontView;
 	void createWindow(int Xsize, int Ysize);
 
-	void drawShelves();
+	
+
+
+	int BORDER_VIEWS_X_AXIS; //granica pomiedzy widokiem z gory a dolu
+	int BORDER_VIEWS_Y_AXIS; //granica pomiedzy oknem dialogowym a grafika
 
 };
 

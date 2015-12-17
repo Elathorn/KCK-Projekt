@@ -18,7 +18,8 @@ Shelf::Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, Mova
 	_botShelf = botShelf;
 
 	//@todo : zmieniæ to ³adnie wszystko
-	_sprite = IOManager::loadSpriteFromFile("shelftopdown.png");
+	_sprite = new sf::Sprite();
+	_sprite->setTexture(*IOManager::loadSpriteFromFile("shelftopdown.png"));
 	_sprite->scale(SHELF_SCALE_RATIO, SHELF_SCALE_RATIO);
 	setSpritePositionOnWindow();
 }
@@ -98,8 +99,8 @@ void Shelf::setSpritePositionOnWindow()
 	else if (_locationYAxis > 8)
 		rotation = SOUTH;
 	else if (_locationXAxis < 3)
-		rotation = WEST;
-	else rotation = EAST;
+		rotation = EAST;
+	else rotation = WEST;
 
 	
 	_sprite->setRotation(rotation * 90);

@@ -48,15 +48,17 @@ map<string, string>* IOManager::loadMapFromFile(string fileName)
 	return nullptr;
 }
 
-sf::Texture* IOManager::loadSpriteFromFile(string fileName) //@todo: zapobiegniecie wczytywaniu x razy tej samej tekstury
+sf::Texture* IOManager::loadTextureFromFile(string fileName) //@todo: zapobiegniecie wczytywaniu x razy tej samej tekstury
 {
 	string location = GRAPHICS_FILES_LOCATION + fileName;
 	location = location.c_str();
 	sf::Sprite* sprite = new sf::Sprite();
 	sf::Texture* texture = new sf::Texture();
 	//@todo: sprawdzenie czy zaladowalo texture
-	texture->loadFromFile(location);
-	return texture;
+	if (texture->loadFromFile(location))
+		return texture;
+	else
+		ErrorHandler::errorMessage(ErrorHandler::FILE_FAILED_TO_LOAD, fileName);
 	/*sprite = new sf::Sprite;
 	sprite->setTexture(*texture);
 	return sprite;*/

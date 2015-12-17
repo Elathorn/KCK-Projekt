@@ -1,12 +1,13 @@
 #include "TopView.h"
+#include "TextureManager.h"
 
 
-
-TopView::TopView(RenderWindow& window, Mechanic* mech, int borderXAxis, int borderYAxis) : _window(window)
+TopView::TopView(FrontView* FV, TextureManager* TM, RenderWindow& window, Mechanic* mech, int borderXAxis, int borderYAxis) : _window(window)
 {
 	_mech = mech;
-	_background = new Sprite(*IOManager::loadSpriteFromFile("floor.png"), IntRect(10, 10, borderXAxis, borderYAxis));
+	_background = new Sprite(*TM->getTexture("floor"), IntRect(10, 10, borderXAxis, borderYAxis));
 	_vec = _mech->getShelvesVec();
+	_FV = FV;
 }
 
 
@@ -28,10 +29,13 @@ void TopView::executeEvent(Vector2f& mouse, Event& event)
 	{
 		Sprite* sprite = (*it)->getSprite();
 		//if (sprite->getGlobalBounds().contains(mouse))
-		if (event.type == Event::MouseButtonPressed)
+		if (sprite->getGlobalBounds().contains(mouse)) //jezeli ktoras z polek jest wskazana
+		{
 			sprite->setColor(Color(255, 255, 0, 255));
+			_FV->setActualShelf(*it); //zmieniamy aktualnie wyswietlana polke
+		}
 		else
-			sprite->setColor(Color(0, 255, 0, 255));
+			sprite->setColor(Color(0, 255, 0, 255)); //w innym wypadku
 	}
 	return;
 }

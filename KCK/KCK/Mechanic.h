@@ -3,6 +3,7 @@
 #include "ErrorHandler.h"
 #include "Logger.h"
 #include <vector>
+#include "TextureManager.h"
 using namespace std;
 
 class Mechanic
@@ -24,6 +25,7 @@ public:
 
 	Grid* getGrid(int locX, int locY);
 	vector<Shelf*> getShelvesVec() { return _shelvesVec; }
+	void mapCreator(TextureManager* TM);
 
 private:
 	Grid* _map[MAP_X_SIZE][MAP_Y_SIZE];
@@ -32,7 +34,7 @@ private:
 	vector<Shelf*> _shelvesVec;
 	Grid* _emptyGrid;
 
-	void _mapCreator();
+	
 
 };
 

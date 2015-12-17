@@ -4,15 +4,22 @@
 
 GraphicManager::GraphicManager()
 {
+	TextureManager* TM = new TextureManager(); //stworzenie managera textur
 	_SI = new ScriptInterpreter();
+
+	//stworzenie mechaniki i mapy
 	_mech = _SI->getMechanic();
+	_mech->mapCreator(TM);
+
+	//stworzenie okna i jego podzialu
 	createWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
 	BORDER_VIEWS_Y_AXIS = _mech->findShelf("south")->getSprite()->getGlobalBounds().top
 		+ _mech->findShelf("south")->getSprite()->getGlobalBounds().height;
 	BORDER_VIEWS_X_AXIS = _mech->findShelf("east")->getSprite()->getGlobalBounds().left
 		+ _mech->findShelf("east")->getSprite()->getGlobalBounds().width;
-	_topView = new TopView(*_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
-	_frontView = new FrontView(*_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
+	_frontView = new FrontView(TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
+	_topView = new TopView(_frontView, TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
+	
 }
 
 

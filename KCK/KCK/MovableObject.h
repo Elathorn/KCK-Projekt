@@ -1,12 +1,13 @@
 #pragma once
 #include "string"
+#include "TextureManager.h"
 #include <SFML\Graphics.hpp>
 using namespace std;
 
 class MovableObject 
 {
 public:
-	MovableObject(int posX, int posY, string color, string size);
+	MovableObject(TextureManager *TM, int posX, int posY, string color, string size);
 	~MovableObject();
 	void setSprite(sf::Sprite * newSprite) { _sprite = newSprite; }
 	sf::Sprite* getSprite() { return _sprite; }
@@ -23,5 +24,7 @@ private:
 	string _color;
 	int _locationXAxis;
 	int _locationYAxis;
+
+	sf::Color _convertStringToColor(string colorStr);
 };
 

@@ -1,5 +1,5 @@
 #include "Grids.h"
-#include "IOManager.h"
+#include "TextureManager.h"
 
 #define GRID_TO_WINDOW_RATIO 45
 #define SHELF_SCALE_RATIO 0.1
@@ -9,7 +9,7 @@ Grid::Grid()
 }
 
 
-Shelf::Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf) 
+Shelf::Shelf(TextureManager* TM, int locationXAxis, int locationYAxis, MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf) 
 {
 	_locationXAxis = locationXAxis;
 	_locationYAxis = locationYAxis;
@@ -19,7 +19,7 @@ Shelf::Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, Mova
 
 	//@todo : zmieniæ to ³adnie wszystko
 	_sprite = new sf::Sprite();
-	_sprite->setTexture(*IOManager::loadSpriteFromFile("shelftopdown.png"));
+	_sprite->setTexture(*TM->getTexture("shelftopdown"));
 	_sprite->scale(SHELF_SCALE_RATIO, SHELF_SCALE_RATIO);
 	setSpritePositionOnWindow();
 }

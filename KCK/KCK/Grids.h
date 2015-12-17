@@ -1,7 +1,7 @@
 #pragma once
 #include "MovableObject.h"
 #include <SFML/Graphics.hpp>
-
+#include "TextureManager.h"
 
 class Grid 
 {
@@ -23,7 +23,8 @@ private:
 class Shelf : public Grid 
 {
 public:
-	Shelf(int locationXAxis, int locationYAxis, MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf);
+	Shelf(TextureManager* TM, int locationXAxis, int locationYAxis,
+		MovableObject* topShelf, MovableObject* midShelf, MovableObject* botShelf);
 //	~Shelf();
 
 

@@ -28,8 +28,8 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	vector<string>* script = _NI->recognizeOrder(humanInput);
 	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject };
 	bool commandComplete = false;
-	Shelf* shelf;
-	MovableObject* obj;
+	Shelf* shelf = nullptr;
+	MovableObject* obj = nullptr;
 	while (!commandComplete)
 	{
 		commandComplete = true;

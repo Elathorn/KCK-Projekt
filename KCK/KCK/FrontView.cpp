@@ -32,17 +32,22 @@ void FrontView::executeEvent(Vector2f & mouse, Event & event)
 
 void FrontView::_drawMovableObjects()
 {
-	char levels[3] = { Shelf::TOP_SHELF, Shelf::MID_SHELF, Shelf::BOT_SHELF};
+
 
 	if (_actShelf == NULL)
 		return;
+
+    char levels[3] = { Shelf::TOP_SHELF, Shelf::MID_SHELF, Shelf::BOT_SHELF };
+    int X_COORD = _borderXAxis + (WINDOW_WIDTH - _borderXAxis) / 2;
+    int Y_COORD[3] = {55, 229, 401}; //obliczone z góry
 
 	for (int i = 0; i < 3; i++)
 	{
 		if (_actShelf->getShelf(levels[i]))
 		{
 			Sprite * spr = _actShelf->getShelf(levels[i])->getSprite();
-			spr->setPosition(50 + 100 * i, 50 + 100 * i);
+			spr->setPosition(X_COORD - spr->getGlobalBounds().width/2,
+                 Y_COORD[i]);
 			if (spr != NULL)
 				_window.draw(*spr);
 		}

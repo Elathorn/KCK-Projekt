@@ -31,11 +31,11 @@ void TopView::executeEvent(Vector2f& mouse, Event& event)
 		//if (sprite->getGlobalBounds().contains(mouse))
 		if (sprite->getGlobalBounds().contains(mouse)) //jezeli ktoras z polek jest wskazana
 		{
-			sprite->setColor(Color(255, 255, 0, 255));
+			sprite->setColor(Color(200, 200, 200, 200));
 			_FV->setActualShelf(*it); //zmieniamy aktualnie wyswietlana polke
 		}
 		else
-			sprite->setColor(Color(0, 255, 0, 255)); //w innym wypadku
+			sprite->setColor(Color(255, 255, 255, 255)); //w innym wypadku
 	}
 	return;
 }

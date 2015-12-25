@@ -19,7 +19,7 @@ Shelf::Shelf(TextureManager* TM, int locationXAxis, int locationYAxis, MovableOb
 
 	//@todo : zmieniæ to ³adnie wszystko
 	_sprite = new sf::Sprite();
-	_sprite->setTexture(*TM->getTexture("shelftopdown"));
+	_sprite->setTexture(*TM->getTexture("shelfTopDown"));
 	_sprite->scale(SHELF_SCALE_RATIO, SHELF_SCALE_RATIO);
 	setSpritePositionOnWindow();
 }

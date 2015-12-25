@@ -23,64 +23,59 @@ ScriptInterpreter::~ScriptInterpreter()
 
 }
 
-string ScriptInterpreter::interpretUserInput(string humanInput) //todo todo todo!!!! ogrpmne testy bo kolejnopsc kodu zmieniana w chuj :/
+string ScriptInterpreter::interpretUserInput(string humanInput)
 {
 	vector<string>* script = _NI->recognizeOrder(humanInput);
 	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject };
 	bool commandComplete = false;
-	Shelf* shelf;
-	MovableObject* obj;
-	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara
-	string orderStr = (*script)[order];
-	MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
-	if (orderStr == "go")
+	Shelf* shelf = nullptr;
+	MovableObject* obj = nullptr;
+	while (!commandComplete)
 	{
-		while (!commandComplete)
+		commandComplete = true;
+		if (script->at(order) == "")
 		{
-			commandComplete = true;
-			shelf = _mechanic->findShelf(script->at(adjToShelf));
-			if (shelf == NULL) //je?li nie znaleziono pó³ki
-			{
-				GraphicManager::printCommunicate(randomizeAnswer(shelfNotFound));
-				script->at(adjToShelf) = _NI->searchForToken(shelfNotFound);
-				commandComplete = false;
-			}
-			obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
-			if (obj == NULL) //je?li nie znaleziono obiektu
-			{
-				GraphicManager::printCommunicate(randomizeAnswer(movableObjNotFound));
-				script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
-				commandComplete = false;
-			}
-			if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
-			{
-				GraphicManager::printCommunicate(randomizeAnswer(rackNotFound));
-				(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
-				commandComplete = false;
-			}
-		}
+			GraphicManager::printCommunicate(randomizeAnswer(commandNotUnderstanded));
+			script->at(order) = _NI->searchForToken(commandNotUnderstanded);
+			commandComplete = false;
 
+		}
+		shelf = _mechanic->findShelf(script->at(adjToShelf));
+		if (shelf == NULL) //je?li nie znaleziono pó³ki
+		{
+			GraphicManager::printCommunicate(randomizeAnswer(shelfNotFound)); 
+			script->at(adjToShelf) = _NI->searchForToken(shelfNotFound);
+			commandComplete = false;
+		}
+		obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
+		if (obj == NULL) //je?li nie znaleziono obiektu
+		{
+			GraphicManager::printCommunicate(randomizeAnswer(movableObjNotFound));
+			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
+			commandComplete = false;
+		}
+		if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
+		{
+			GraphicManager::printCommunicate(randomizeAnswer(rackNotFound)); 
+			(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
+			commandComplete = false;
+		}
+	}
+
+	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara (wszystko działa)
+	string orderStr = (*script)[order];
+	delete script;
+	MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
+
+
+	if (orderStr == "go")
 		if (objAtTargetShelf == obj) //jesli ten obiekt jest juz na tej polce
 			return randomizeAnswer(objectIsActuallyHere); //informujemy o tym uzytkownika
 		else if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar)) //jezeli NIE udalo sie przeniesc obiektu (pelna polka)
 			return randomizeAnswer(shelfIsFull);
 		else  //inaczej jesli sie udalo
 			return randomizeAnswer(goOrderDone);
-	}
-	else if (orderStr == "what")
-	{
-		cout << "Poszlo what";
-	}
-	else
-	{
-		GraphicManager::printCommunicate(randomizeAnswer(commandNotUnderstanded));
-		script->at(order) = _NI->searchForToken(commandNotUnderstanded);
-	}
 
-	
-
-
-	delete script;
 	return randomizeAnswer(commandNotUnderstanded); //todo: wrzucic to do petli dialogowania
 }
 

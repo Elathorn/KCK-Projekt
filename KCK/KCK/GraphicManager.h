@@ -4,6 +4,7 @@
 #include <string>
 #include "ScriptInterpreter.h"
 #include "TopView.h"
+#include "TextView.h"
 #include "FrontView.h"
 using namespace std;
 using namespace sf;
@@ -25,6 +26,7 @@ private:
 	RenderWindow* _window;
 	TopView* _topView;
 	FrontView* _frontView;
+	TextView* _textView;
 	void createWindow(int Xsize, int Ysize);
 
 	

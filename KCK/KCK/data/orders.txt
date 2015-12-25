@@ -6,3 +6,5 @@ jedz;go
 rusz;go
 zabierz;go
 zanies;go
+co;what
+jakie;what

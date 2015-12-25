@@ -19,6 +19,7 @@ GraphicManager::GraphicManager()
 		+ _mech->findShelf("east")->getSprite()->getGlobalBounds().width;
 	_frontView = new FrontView(TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
 	_topView = new TopView(_frontView, TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
+	_textView = new TextView(*_window, BORDER_VIEWS_X_AXIS);
 	
 }
 
@@ -50,9 +51,9 @@ void GraphicManager::runGraphic()
 		//czyszczenie
 		_window->clear();
 		//rysowanie
-		
 		_topView->drawAllContent();
 		_frontView->drawAllContent();
+		_textView->drawAllContent();
 		//wyswietlanie
 		_window->display();
 	}

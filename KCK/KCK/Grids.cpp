@@ -28,7 +28,7 @@ Shelf::Shelf(TextureManager* TM, int locationXAxis, int locationYAxis, MovableOb
 
 MovableObject * Shelf::getTopShelf()
 {
-	if (_topShelf == nullptr)
+	if (_topShelf == nullptr) //todo tu jest niebezpiecznie
 		return nullptr;
 	else
 		return _topShelf;

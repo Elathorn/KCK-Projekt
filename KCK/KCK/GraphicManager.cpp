@@ -68,6 +68,7 @@ void GraphicManager::runGraphic()
 void GraphicManager::printCommunicate(string communicat)
 {
 	_textBase->addText(communicat);
+	_textBase->addText("");
 }
 
 string GraphicManager::getStringFromUser()

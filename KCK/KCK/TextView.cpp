@@ -6,11 +6,18 @@ TextBase::TextBase(RenderWindow & window, int borderXAxis) : _window(window)
 	for (int i = 0; i < TEXT_LINES; i++)
 	{
 		_text[i] = new Text();
-		_text[i]->setString("SAMPLE TEXT");
 		_text[i]->setFont(*_font);
 		_text[i]->setPosition(0, borderXAxis + (FONT_SIZE * 1.5 * i));
-		if (i==4) _text[i]->setColor(sf::Color::Red);
-		else  _text[i]->setColor(sf::Color::White);
+		if (i==4) 
+		{
+			_text[i]->setColor(sf::Color::Red);
+			_text[i]->setString("");
+		}
+		else
+		{
+			_text[i]->setColor(sf::Color::White);
+			_text[i]->setString("DEBUG");
+		}
 		_text[i]->setCharacterSize(FONT_SIZE);
 	}
 }
@@ -23,11 +30,11 @@ void TextBase::drawAllContent()
 
 void TextBase::addText(string textToAdd)
 {
-	for (int i = 0; i < TEXT_LINES-1; i++)
+	for (int i = 0; i < TEXT_LINES; i++)
 	{
-		_text[i] = _text[i + 1];
+		_text[i]->setString(_text[i + 1]->getString());
 	}
-	_text[TEXT_LINES-1]->setString(textToAdd);
+	_text[TEXT_LINES - 1]->setString(textToAdd);
 }
 
 void TextBase::modifyTextByChar(char charToAdd)

@@ -5,17 +5,20 @@
 #include "GraphicsConfig.h"
 #include "IOManager.h"
 using namespace sf;
-class TextView
+class TextBase
 {
 public:
-	TextView(RenderWindow& window, int borderXAxis);
+	TextBase(RenderWindow& window, int borderXAxis);
 	void drawAllContent();
+	void addText(string textToAdd);
+	void addText(char charToAdd);
 
 private:
-	Text _text;
+	static const int TEXT_LINES = 5; //okresla iloœæ linii tekstu w programie
+	static const int FONT_SIZE = 100/TEXT_LINES;
+	Text * _text[TEXT_LINES];
 	RenderWindow& _window;
-	Mechanic* _mech;
-	Font* _font;
+	Font * _font;
 	int _borderXAxis;
 };
 

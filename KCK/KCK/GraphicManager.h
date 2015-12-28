@@ -26,7 +26,7 @@ private:
 	RenderWindow* _window;
 	TopView* _topView;
 	FrontView* _frontView;
-	TextView* _textView;
+	TextBase* _textBase;
 	void createWindow(int Xsize, int Ysize);
 
 	

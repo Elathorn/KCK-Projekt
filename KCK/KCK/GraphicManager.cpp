@@ -19,7 +19,7 @@ GraphicManager::GraphicManager()
 		+ _mech->findShelf("east")->getSprite()->getGlobalBounds().width;
 	_frontView = new FrontView(TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
 	_topView = new TopView(_frontView, TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
-	_textView = new TextView(*_window, BORDER_VIEWS_X_AXIS);
+	_textBase = new TextBase(*_window, BORDER_VIEWS_X_AXIS);
 	
 }
 
@@ -36,10 +36,10 @@ void GraphicManager::runGraphic()
 		Event event;
 		while (_window->pollEvent(event))
 		{
-			//jesli event dzieje sie na terenie ktoregos z pol, tam go wysylamy
-			//if (mouse.y > BORDER_VIEWS_Y_AXIS)
-
-			//else
+			if (event.type == sf::Event::TextEntered)
+			{
+			
+			}
 			if (mouse.x < BORDER_VIEWS_X_AXIS)
 				_topView->executeEvent(mouse, event);
 			else
@@ -53,7 +53,7 @@ void GraphicManager::runGraphic()
 		//rysowanie
 		_topView->drawAllContent();
 		_frontView->drawAllContent();
-		_textView->drawAllContent();
+		_textBase->drawAllContent();
 		//wyswietlanie
 		_window->display();
 	}

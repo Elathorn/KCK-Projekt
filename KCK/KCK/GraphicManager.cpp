@@ -5,7 +5,7 @@
 GraphicManager::GraphicManager()
 {
 	TextureManager* TM = new TextureManager(); //stworzenie managera textur
-	_SI = new ScriptInterpreter();
+	_SI = new ScriptInterpreter(this);
 
 	//stworzenie mechaniki i mapy
 	_mech = _SI->getMechanic();
@@ -38,7 +38,14 @@ void GraphicManager::runGraphic()
 		{
 			if (event.type == sf::Event::TextEntered)
 			{
-			
+				if (event.text.unicode == UNICODE_ENTER_CODE)
+				{
+					_SI->interpretUserInput(_textBase->getLastLine());
+				}
+				else
+				{
+					_textBase->modifyTextByChar(event.text.unicode);
+				}
 			}
 			if (mouse.x < BORDER_VIEWS_X_AXIS)
 				_topView->executeEvent(mouse, event);
@@ -61,7 +68,7 @@ void GraphicManager::runGraphic()
 
 void GraphicManager::printCommunicate(string communicat)
 {
-	cout << endl << communicat << endl;
+	_textBase->addText(communicat);
 }
 
 string GraphicManager::getStringFromUser()

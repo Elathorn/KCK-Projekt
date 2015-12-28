@@ -1,6 +1,4 @@
 #include "TextView.h"
-#include <iostream>
-#include <queue>
 TextBase::TextBase(RenderWindow & window, int borderXAxis) : _window(window)
 {
 	_font = new Font();
@@ -32,9 +30,16 @@ void TextBase::addText(string textToAdd)
 	_text[TEXT_LINES-1]->setString(textToAdd);
 }
 
-void TextBase::addText(char charToAdd)
+void TextBase::modifyTextByChar(char charToAdd)
 {
 	string tempString = _text[TEXT_LINES - 1]->getString();
+	if (int(charToAdd) != 8)
 	tempString += charToAdd;
+	else tempString.pop_back();
 	_text[TEXT_LINES - 1]->setString(tempString);
+}
+
+string TextBase::getLastLine()
+{
+	return _text[TEXT_LINES-1]->getString();
 }

@@ -15,7 +15,7 @@ public:
 	~GraphicManager();
 
 	void runGraphic(); //todo: grafika, lul
-	static void printCommunicate(string communicat);
+	void printCommunicate(string communicat);
 	static string getStringFromUser();
 
 	
@@ -31,7 +31,7 @@ private:
 
 	
 
-
+	static const int UNICODE_ENTER_CODE = 13;
 	int BORDER_VIEWS_X_AXIS; //granica pomiedzy widokiem z gory a dolu
 	int BORDER_VIEWS_Y_AXIS; //granica pomiedzy oknem dialogowym a grafika
 

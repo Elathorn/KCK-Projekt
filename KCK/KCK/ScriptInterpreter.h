@@ -10,7 +10,7 @@ class GraphicManager;
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter();
+	ScriptInterpreter(GraphicManager * GM);
 	~ScriptInterpreter();
 
 	string interpretUserInput(string humanInput);
@@ -18,6 +18,7 @@ public:
 
 	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded, rackNotFound, objectIsActuallyHere };
 private:
+	GraphicManager *_GM;
 	vector<string>* _script;
 	Mechanic* _mechanic;
 	NaturalInterpreter* _NI;

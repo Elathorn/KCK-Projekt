@@ -3,11 +3,11 @@
 
 
 
-ScriptInterpreter::ScriptInterpreter()
+ScriptInterpreter::ScriptInterpreter(GraphicManager * GM)
 {
 	_mechanic = new Mechanic(); //tworzenie mechaniki
 	_NI = new NaturalInterpreter(); //i interpretera jezyka naturalnego
-
+	_GM = GM;
 	_shelfNotFoundTxt = IOManager::loadVectorFromFile("shelfNotFound.txt");
 	_movableObjNotFoundTxt = IOManager::loadVectorFromFile("movableObjectNotFound.txt");
 	_shelfIsFullTxt = IOManager::loadVectorFromFile("shelfIsFull.txt");
@@ -35,7 +35,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 		commandComplete = true;
 		if (script->at(order) == "")
 		{
-			GraphicManager::printCommunicate(randomizeAnswer(commandNotUnderstanded));
+			_GM->printCommunicate(randomizeAnswer(commandNotUnderstanded));
 			script->at(order) = _NI->searchForToken(commandNotUnderstanded);
 			commandComplete = false;
 
@@ -43,20 +43,20 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 		shelf = _mechanic->findShelf(script->at(adjToShelf));
 		if (shelf == NULL) //je?li nie znaleziono pó³ki
 		{
-			GraphicManager::printCommunicate(randomizeAnswer(shelfNotFound)); 
+			_GM->printCommunicate(randomizeAnswer(shelfNotFound));
 			script->at(adjToShelf) = _NI->searchForToken(shelfNotFound);
 			commandComplete = false;
 		}
 		obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
 		if (obj == NULL) //je?li nie znaleziono obiektu
 		{
-			GraphicManager::printCommunicate(randomizeAnswer(movableObjNotFound));
+			_GM->printCommunicate(randomizeAnswer(movableObjNotFound));
 			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
 			commandComplete = false;
 		}
 		if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
 		{
-			GraphicManager::printCommunicate(randomizeAnswer(rackNotFound)); 
+			_GM->printCommunicate(randomizeAnswer(rackNotFound));
 			(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
 			commandComplete = false;
 		}

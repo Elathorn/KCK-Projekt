@@ -1,13 +1,15 @@
 #include "ScriptInterpreter.h"
 #include "GraphicManager.h"
 
+extern NaturalInterpreter * NI;
+extern ScriptInterpreter * SI;
+extern GraphicManager * GM;
+extern Mechanic * mechanic;
 
-
-ScriptInterpreter::ScriptInterpreter(GraphicManager * GM)
+ScriptInterpreter::ScriptInterpreter()
 {
-	_mechanic = new Mechanic(); //tworzenie mechaniki
-	_NI = new NaturalInterpreter(); //i interpretera jezyka naturalnego
-	_GM = GM;
+	mechanic = new Mechanic(); //tworzenie mechaniki
+	NI = new NaturalInterpreter(); //i interpretera jezyka naturalnego
 	_shelfNotFoundTxt = IOManager::loadVectorFromFile("shelfNotFound.txt");
 	_movableObjNotFoundTxt = IOManager::loadVectorFromFile("movableObjectNotFound.txt");
 	_shelfIsFullTxt = IOManager::loadVectorFromFile("shelfIsFull.txt");
@@ -25,40 +27,44 @@ ScriptInterpreter::~ScriptInterpreter()
 
 string ScriptInterpreter::interpretUserInput(string humanInput)
 {
-	vector<string>* script = _NI->recognizeOrder(humanInput);
+	vector<string>* script = NI->recognizeOrder(humanInput);
 	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject };
 	bool commandComplete = false;
 	Shelf* shelf = nullptr;
 	MovableObject* obj = nullptr;
-	while (!commandComplete)
+	while (!commandComplete) //todo: wszystko - to jest spierdolone
 	{
 		commandComplete = true;
 		if (script->at(order) == "")
 		{
-			_GM->printCommunicate(randomizeAnswer(commandNotUnderstanded));
-			script->at(order) = _NI->searchForToken(commandNotUnderstanded);
+			GM->printCommunicate(randomizeAnswer(commandNotUnderstanded));
+			script->at(order) = NI->searchForToken(commandNotUnderstanded);
 			commandComplete = false;
+			break;
 
 		}
-		shelf = _mechanic->findShelf(script->at(adjToShelf));
+		shelf = mechanic->findShelf(script->at(adjToShelf));
 		if (shelf == NULL) //je?li nie znaleziono pó³ki
 		{
-			_GM->printCommunicate(randomizeAnswer(shelfNotFound));
-			script->at(adjToShelf) = _NI->searchForToken(shelfNotFound);
+			GM->printCommunicate(randomizeAnswer(shelfNotFound));
+			script->at(adjToShelf) = NI->searchForToken(shelfNotFound);
 			commandComplete = false;
+			break;
 		}
-		obj = _mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
+		obj = mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
 		if (obj == NULL) //je?li nie znaleziono obiektu
 		{
-			_GM->printCommunicate(randomizeAnswer(movableObjNotFound));
-			script->at(colorOfMovableObject) = _NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
+			GM->printCommunicate(randomizeAnswer(movableObjNotFound));
+			script->at(colorOfMovableObject) = NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
 			commandComplete = false;
+			break;
 		}
 		if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
 		{
-			_GM->printCommunicate(randomizeAnswer(rackNotFound));
-			(*script)[lvlOfShelf] = _NI->searchForToken(rackNotFound);
+			GM->printCommunicate(randomizeAnswer(rackNotFound)); 
+			(*script)[lvlOfShelf] = NI->searchForToken(rackNotFound);
 			commandComplete = false;
+			break;
 		}
 	}
 
@@ -71,7 +77,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	if (orderStr == "go")
 		if (objAtTargetShelf == obj) //jesli ten obiekt jest juz na tej polce
 			return randomizeAnswer(objectIsActuallyHere); //informujemy o tym uzytkownika
-		else if (_mechanic->moveObject(shelf, obj, lvlOfShelfChar)) //jezeli NIE udalo sie przeniesc obiektu (pelna polka)
+		else if (mechanic->moveObject(shelf, obj, lvlOfShelfChar)) //jezeli NIE udalo sie przeniesc obiektu (pelna polka)
 			return randomizeAnswer(shelfIsFull);
 		else  //inaczej jesli sie udalo
 			return randomizeAnswer(goOrderDone);

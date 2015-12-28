@@ -5,20 +5,19 @@
 GraphicManager::GraphicManager()
 {
 	TextureManager* TM = new TextureManager(); //stworzenie managera textur
-	_SI = new ScriptInterpreter(this);
+	SI = new ScriptInterpreter();
 
 	//stworzenie mechaniki i mapy
-	_mech = _SI->getMechanic();
-	_mech->mapCreator(TM);
+	mechanic->mapCreator(TM);
 
 	//stworzenie okna i jego podzialu
 	createWindow(WINDOW_WIDTH, WINDOW_HEIGHT);
-	BORDER_VIEWS_Y_AXIS = _mech->findShelf("south")->getSprite()->getGlobalBounds().top
-		+ _mech->findShelf("south")->getSprite()->getGlobalBounds().height;
-	BORDER_VIEWS_X_AXIS = _mech->findShelf("east")->getSprite()->getGlobalBounds().left
-		+ _mech->findShelf("east")->getSprite()->getGlobalBounds().width;
-	_frontView = new FrontView(TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
-	_topView = new TopView(_frontView, TM, *_window, _mech, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
+	BORDER_VIEWS_Y_AXIS = mechanic->findShelf("south")->getSprite()->getGlobalBounds().top
+		+ mechanic->findShelf("south")->getSprite()->getGlobalBounds().height;
+	BORDER_VIEWS_X_AXIS = mechanic->findShelf("east")->getSprite()->getGlobalBounds().left
+		+ mechanic->findShelf("east")->getSprite()->getGlobalBounds().width;
+	_frontView = new FrontView(TM, *_window, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
+	_topView = new TopView(_frontView, TM, *_window, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
 	_textBase = new TextBase(*_window, BORDER_VIEWS_X_AXIS);
 	
 }
@@ -40,7 +39,7 @@ void GraphicManager::runGraphic()
 			{
 				if (event.text.unicode == UNICODE_ENTER_CODE)
 				{
-					_SI->interpretUserInput(_textBase->getLastLine());
+					SI->interpretUserInput(_textBase->getLastLine());
 				}
 				else
 				{
@@ -73,9 +72,7 @@ void GraphicManager::printCommunicate(string communicat)
 
 string GraphicManager::getStringFromUser()
 {
-	string humanInput;
-	getline(cin, humanInput);
-	return humanInput;
+	return _textBase->getLastLine();
 }
 
 void GraphicManager::createWindow(int Xsize, int Ysize)

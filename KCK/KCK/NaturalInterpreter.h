@@ -4,6 +4,9 @@
 class ScriptInterpreter;
 class GraphicManager;
 
+extern GraphicManager * GM;
+
+
 using namespace std;
 
 class NaturalInterpreter //interpretacja jêzyka naturalnego

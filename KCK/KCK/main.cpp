@@ -7,13 +7,20 @@
 //////////////////
 
 #include "GraphicManager.h"
+#include "NaturalInterpreter.h"
+#include "ScriptInterpreter.h"
+#include "Mechanic.h"
 
 using namespace std;
 
+GraphicManager * GM = NULL;
+NaturalInterpreter * NI = NULL;
+ScriptInterpreter * SI = NULL;
+Mechanic * mechanic = NULL;
 
 int main()
 {
-	GraphicManager* GM = new GraphicManager();
+	GM = new GraphicManager();
 	GM->runGraphic();
 
 	return 0; 

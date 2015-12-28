@@ -6,6 +6,10 @@
 #include "TopView.h"
 #include "TextView.h"
 #include "FrontView.h"
+
+extern ScriptInterpreter * SI;
+
+
 using namespace std;
 using namespace sf;
 class GraphicManager
@@ -16,13 +20,11 @@ public:
 
 	void runGraphic(); //todo: grafika, lul
 	void printCommunicate(string communicat);
-	static string getStringFromUser();
+	string getStringFromUser();
 
 	
 
 private:
-	ScriptInterpreter* _SI;
-	Mechanic* _mech; //todo: zmieniæ to jakoœ?
 	RenderWindow* _window;
 	TopView* _topView;
 	FrontView* _frontView;

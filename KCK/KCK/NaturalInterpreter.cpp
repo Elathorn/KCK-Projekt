@@ -61,7 +61,7 @@ string NaturalInterpreter::searchForToken(int enumKeyWordType)
 {
 	string token;
 	vector<string> * tokens;
-	token = GraphicManager::getStringFromUser(); //wczytujemy do tokena user input
+	token = GM->getStringFromUser(); //wczytujemy do tokena user input
 	tokens = tokenizer(token, _separator); //tokenizujemy user input
 	switch (enumKeyWordType)
 	{

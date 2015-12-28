@@ -5,23 +5,25 @@
 #include <time.h>
 using namespace std;
 
+extern NaturalInterpreter * NI;
+extern Mechanic * mechanic;
+
+
+
 class GraphicManager;
 
 class ScriptInterpreter
 {
 public:
-	ScriptInterpreter(GraphicManager * GM);
+	ScriptInterpreter();
 	~ScriptInterpreter();
 
 	string interpretUserInput(string humanInput);
-	Mechanic* getMechanic() { return _mechanic; }
+	Mechanic* getMechanic() { return mechanic; }
 
 	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded, rackNotFound, objectIsActuallyHere };
 private:
-	GraphicManager *_GM;
 	vector<string>* _script;
-	Mechanic* _mechanic;
-	NaturalInterpreter* _NI;
 	vector<string>* _shelfNotFoundTxt;
 	vector<string>* _movableObjNotFoundTxt;
 	vector<string>* _shelfIsFullTxt;

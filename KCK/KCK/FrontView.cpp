@@ -4,10 +4,9 @@
 
 
 
-FrontView::FrontView(TextureManager* TM,RenderWindow & window, Mechanic * mech, int borderXAxis, int borderYAxis) : _window(window)
+FrontView::FrontView(TextureManager* TM,RenderWindow & window, int borderXAxis, int borderYAxis) : _window(window)
 {
 	_actShelf = NULL;
-	_mech = mech;
 	_borderXAxis = borderXAxis;
 	_borderYAxis = borderYAxis;
 	_background = new Sprite(*TM->getTexture("shelfFront"));

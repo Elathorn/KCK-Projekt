@@ -35,7 +35,7 @@ void TextBase::modifyTextByChar(char charToAdd)
 	string tempString = _text[TEXT_LINES - 1]->getString();
 	if (int(charToAdd) != 8)
 	tempString += charToAdd;
-	else tempString.pop_back();
+	else if (tempString.length() > 0) tempString.pop_back();
 	_text[TEXT_LINES - 1]->setString(tempString);
 }
 

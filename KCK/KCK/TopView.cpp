@@ -1,12 +1,13 @@
 #include "TopView.h"
 #include "TextureManager.h"
 
+extern Mechanic * mechanic;
 
-TopView::TopView(FrontView* FV, TextureManager* TM, RenderWindow& window, Mechanic* mech, int borderXAxis, int borderYAxis) : _window(window)
+
+TopView::TopView(FrontView* FV, TextureManager* TM, RenderWindow& window, int borderXAxis, int borderYAxis) : _window(window)
 {
-	_mech = mech;
 	_background = new Sprite(*TM->getTexture("floor"), IntRect(10, 10, borderXAxis, borderYAxis));
-	_vec = _mech->getShelvesVec();
+	_vec = mechanic->getShelvesVec();
 	_FV = FV;
 }
 

@@ -20,7 +20,11 @@ public:
 	~Mechanic();
 
 	int moveObject(Shelf*, MovableObject*, char); //przenosi obiekt do wybranej lokalizacji
-	MovableObject* findMovableObject(string color, string size); //wyszukuje pierwszy obiekt o danej charakterystyce, "" dla braku danych
+	MovableObject* findMovableObject(string color); //wyszukuje pierwszy obiekt o danym kolorze
+	MovableObject* findMovableObject(string color, string size) //override dla starej wersji wyszukiwania
+	{
+		return findMovableObject(color);
+	}
 	Shelf* findShelf(string locationStr);
 
 	Grid* getGrid(int locX, int locY);

@@ -28,53 +28,18 @@ ScriptInterpreter::~ScriptInterpreter()
 string ScriptInterpreter::interpretUserInput(string humanInput)
 {
 	vector<string>* script = NI->recognizeOrder(humanInput);
-	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject };
-	bool commandComplete = false;
-	Shelf* shelf = nullptr;
-	MovableObject* obj = nullptr;
-	while (!commandComplete) //todo: wszystko - to jest spierdolone
+
+	//sprawdzenie istnienia rozkazu
+	if (script->at(order) == "")
+		checkValide(order, script);
+	if (script->at(order) == "go")
 	{
-		commandComplete = true;
-		if (script->at(order) == "")
-		{
-			GM->printCommunicate(randomizeAnswer(commandNotUnderstanded));
-			script->at(order) = NI->searchForToken(commandNotUnderstanded);
-			commandComplete = false;
-			break;
-
-		}
-		shelf = mechanic->findShelf(script->at(adjToShelf));
-		if (shelf == NULL) //je?li nie znaleziono pó³ki
-		{
-			GM->printCommunicate(randomizeAnswer(shelfNotFound));
-			script->at(adjToShelf) = NI->searchForToken(shelfNotFound);
-			commandComplete = false;
-			break;
-		}
-		obj = mechanic->findMovableObject(script->at(colorOfMovableObject), script->at(sizeOfMovableObject));
-		if (obj == NULL) //je?li nie znaleziono obiektu
-		{
-			GM->printCommunicate(randomizeAnswer(movableObjNotFound));
-			script->at(colorOfMovableObject) = NI->searchForToken(movableObjNotFound); //todo: ogarn¹æ
-			commandComplete = false;
-			break;
-		}
-		if (script->at(lvlOfShelf) == "") //jesli nie istnieje lokalizator konkretnej polki (przegrodki)
-		{
-			GM->printCommunicate(randomizeAnswer(rackNotFound)); 
-			(*script)[lvlOfShelf] = NI->searchForToken(rackNotFound);
-			commandComplete = false;
-			break;
-		}
-	}
-
-	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara (wszystko działa)
-	string orderStr = (*script)[order];
-//	delete script; //@todo: zapobiegniecie wyciekom pamieci
-	MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
-
-
-	if (orderStr == "go")
+		checkValide(colorOfMovableObject + lvlOfShelf + adjToShelf, script); //WALIDACJA POTRZEBNYCH DANYCH
+		Shelf* shelf = mechanic->findShelf(script->at(adjToShelf));
+		MovableObject* obj = obj = mechanic->findMovableObject(script->at(colorOfMovableObject));
+		char lvlOfShelfChar = script->at(lvlOfShelf)[0];
+		MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
+		delete script;
 		if (objAtTargetShelf == obj) //jesli ten obiekt jest juz na tej polce
 			return randomizeAnswer(objectIsActuallyHere); //informujemy o tym uzytkownika
 		else if (mechanic->moveObject(shelf, obj, lvlOfShelfChar)) //jezeli NIE udalo sie przeniesc obiektu (pelna polka)
@@ -82,7 +47,57 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 		else  //inaczej jesli sie udalo
 			return randomizeAnswer(goOrderDone);
 
-	return randomizeAnswer(commandNotUnderstanded); //todo: wrzucic to do petli dialogowania
+	}
+	//else if (script->at[order] == "")
+
+	//nie powinno sie nigdy zdarzyc, ale strzezonego...
+	delete script;
+	return randomizeAnswer(commandNotUnderstanded);
+}
+
+void ScriptInterpreter::checkValide(int enumSum, vector<string> * script)
+{
+		if (enumSum - colorOfMovableObject >= 0) //jesli roznica jest wieksza od zera
+		{ //nalezy zwalidowac kolor obiektu
+			MovableObject* obj = mechanic->findMovableObject(script->at(colorOfMovableObject));
+			while (obj == nullptr)
+			{
+				GM->printCommunicate(randomizeAnswer(movableObjNotFound));
+				script->at(colorOfMovableObject) = NI->searchForToken(movableObjNotFound);
+				obj = mechanic->findMovableObject(script->at(colorOfMovableObject));
+			}
+			enumSum -= colorOfMovableObject;
+		}
+		if (enumSum - adjToShelf >= 0)
+		{
+			Shelf* shelf = mechanic->findShelf(script->at(adjToShelf));
+			while (shelf == nullptr)
+			{
+				GM->printCommunicate(randomizeAnswer(shelfNotFound));
+				script->at(adjToShelf) = NI->searchForToken(shelfNotFound);
+				shelf = mechanic->findShelf(script->at(adjToShelf));
+			}
+			enumSum -= adjToShelf;
+		}
+		if (enumSum - lvlOfShelf >= 0)
+		{
+			while (script->at(lvlOfShelf) == "")
+			{
+				GM->printCommunicate(randomizeAnswer(rackNotFound));
+				(*script)[lvlOfShelf] = NI->searchForToken(rackNotFound);
+			}
+			enumSum -= adjToShelf;
+		} 
+		if (enumSum - order >= 0)
+		{
+			while (script->at(order) == "")
+			{
+				GM->printCommunicate(randomizeAnswer(commandNotUnderstanded));
+				script->at(order) = NI->searchForToken(commandNotUnderstanded);
+			}
+			enumSum -= order;
+		}
+
 }
 
 string ScriptInterpreter::randomizeAnswer(int enumInt)

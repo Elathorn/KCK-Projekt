@@ -32,7 +32,7 @@ Color MovableObject::_convertStringToColor(string colorStr)
 	if (colorStr == "red")
 		return Color::Red;
 	else if (colorStr == "blue")
-		return Color::Black;
+		return Color::Blue;
 	else if (colorStr == "yellow")
 		return Color::Yellow;
 	else if (colorStr == "black")

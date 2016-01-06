@@ -16,7 +16,11 @@ TextBase::TextBase(RenderWindow & window, int borderXAxis) : _window(window)
 		else
 		{
 			_text[i]->setColor(sf::Color::White);
+#ifdef _DEBUG
 			_text[i]->setString("DEBUG");
+#else
+			_text[i]->setString("");
+#endif
 		}
 		_text[i]->setCharacterSize(FONT_SIZE);
 	}

@@ -35,11 +35,11 @@ int Mechanic::moveObject(Shelf* newShelf, MovableObject * movableObject, char sh
 	return 0;
 }
 
-MovableObject * Mechanic::findMovableObject(string color, string size)
+MovableObject * Mechanic::findMovableObject(string color)
 {
 	for (auto & it : _movableObjectsVec)
 	{ //szuka przedmiotu o takim samym kolorze i rozmiarze
-		if ((color == "" || color == it->getColor()) && (size == "" || size == it->getSize()))
+		if (color == it->getColor())
 			return it;
 	}
 	return NULL;

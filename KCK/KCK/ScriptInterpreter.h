@@ -35,11 +35,19 @@ private:
 	vector<string>* _objectIsActuallyHereTxt;
 
 
+	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject};
+
 private:
 	//answer randomize
 	string randomizeAnswer(int enumInt);
 	int randomNumber(int max);
 
 
+	/*Sprawdza czy wszystkie potrzebne elementy sa juz w vectorze script
+	Przykladowy sposob uzycia:
+	checkValide(order + adjToShelf, script) - sprawdza czy script posiada pozycje order oraz adjToShelf
+	Jesli nie posiada, wczytuje je od usera
+	*/
+	void checkValide(int enumSum, vector<string> * script);
 };
 

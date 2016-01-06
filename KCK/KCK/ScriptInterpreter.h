@@ -21,6 +21,8 @@ public:
 	string interpretUserInput(string humanInput);
 	Mechanic* getMechanic() { return mechanic; }
 
+	void run(); //sluzy do uruchomienia interpretacji jako watek
+
 	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded, rackNotFound, objectIsActuallyHere };
 private:
 	vector<string>* _script;

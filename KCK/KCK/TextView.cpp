@@ -40,7 +40,7 @@ void TextBase::addText(string textToAdd)
 void TextBase::modifyTextByChar(char charToAdd)
 {
 	string tempString = _text[TEXT_LINES - 1]->getString();
-	if (int(charToAdd) != 8)
+	if (int(charToAdd) != UNICODE_BACKSPACE_CODE)
 	tempString += charToAdd;
 	else if (tempString.length() > 0) tempString.pop_back();
 	_text[TEXT_LINES - 1]->setString(tempString);

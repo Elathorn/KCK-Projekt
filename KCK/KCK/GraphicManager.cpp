@@ -1,6 +1,5 @@
 #include "GraphicManager.h"
-
-
+#include <SFML/System.hpp>
 
 GraphicManager::GraphicManager()
 {
@@ -19,7 +18,6 @@ GraphicManager::GraphicManager()
 	_frontView = new FrontView(TM, *_window, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
 	_topView = new TopView(_frontView, TM, *_window, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
 	_textBase = new TextBase(*_window, BORDER_VIEWS_X_AXIS);
-	
 }
 
 
@@ -39,7 +37,7 @@ void GraphicManager::runGraphic()
 			{
 				if (event.text.unicode == UNICODE_ENTER_CODE)
 				{
-					SI->interpretUserInput(_textBase->getLastLine());
+					printCommunicate(SI->interpretUserInput(_textBase->getLastLine()));
 				}
 				else
 				{
@@ -73,7 +71,39 @@ void GraphicManager::printCommunicate(string communicat)
 
 string GraphicManager::getStringFromUser()
 {
-	return _textBase->getLastLine();
+	Event event;
+	while (true)
+	{
+		Vector2f mouse(Mouse::getPosition(*_window));
+		while (_window->pollEvent(event))
+		{
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (event.text.unicode == UNICODE_ENTER_CODE)
+				{
+					return _textBase->getLastLine();
+				}
+				else
+				{
+					_textBase->modifyTextByChar(event.text.unicode);
+				}
+			}
+			if (mouse.x < BORDER_VIEWS_X_AXIS)
+				_topView->executeEvent(mouse, event);
+			else
+				_frontView->executeEvent(mouse, event);
+			if (event.type == Event::Closed)
+				_window->close();
+		}
+		//czyszczenie
+		_window->clear();
+		//rysowanie
+		_topView->drawAllContent();
+		_frontView->drawAllContent();
+		_textBase->drawAllContent();
+		//wyswietlanie
+		_window->display();
+	}
 }
 
 void GraphicManager::createWindow(int Xsize, int Ysize)

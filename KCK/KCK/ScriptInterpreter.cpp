@@ -70,7 +70,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 
 	char lvlOfShelfChar = script->at(lvlOfShelf)[0]; //konwersja stringa na chara (wszystko działa)
 	string orderStr = (*script)[order];
-	delete script;
+//	delete script; //@todo: zapobiegniecie wyciekom pamieci
 	MovableObject* objAtTargetShelf = shelf->getShelf(lvlOfShelfChar); //obiekt ktory moze byc na polce na ktora przenosimy
 
 
@@ -103,4 +103,10 @@ string ScriptInterpreter::randomizeAnswer(int enumInt)
 int ScriptInterpreter::randomNumber(int max)
 {
 	return rand() % max;
+}
+
+void ScriptInterpreter::run()
+{
+	string response = interpretUserInput(GM->getStringFromUser());
+	GM->printCommunicate(response);
 }

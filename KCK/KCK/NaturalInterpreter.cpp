@@ -67,8 +67,8 @@ string NaturalInterpreter::searchForToken(int enumKeyWordType)
 	{
 	case (ScriptInterpreter::shelfNotFound) :
 		token = tokenSearcher(tokens, _adjToShelvesMap); break;
-	case (ScriptInterpreter::movableObjNotFound) :
-		token = tokenSearcher(tokens, _movableObjectsMap); break;
+	case (ScriptInterpreter::movableObjNotFound) : //blad logiczny
+		token = tokenSearcher(tokens, _colorOfMovableObjectsMap); break;
 	case (ScriptInterpreter::rackNotFound) :
 		token = tokenSearcher(tokens, _lvlOfShelves); break;
 	case (ScriptInterpreter::commandNotUnderstanded) :

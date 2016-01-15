@@ -28,6 +28,6 @@ sf::Texture * TextureManager::getTexture(string name)
 	else if (name == "shelfTopDown")
 		return &_textureBank.at(4);
 	else
-		ErrorHandler::errorMessage(301, "");
+		ErrorHandler::errorMessage(ErrorHandler::WANT_NONEXIST_RESPONSE, "");
 
 }

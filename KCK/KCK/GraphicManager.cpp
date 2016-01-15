@@ -18,6 +18,7 @@ GraphicManager::GraphicManager()
 	_frontView = new FrontView(TM, *_window, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
 	_topView = new TopView(_frontView, TM, *_window, BORDER_VIEWS_X_AXIS, BORDER_VIEWS_Y_AXIS);
 	_textBase = new TextBase(*_window, BORDER_VIEWS_X_AXIS);
+	_forklift = new Forklift(*_window, TM);
 }
 
 
@@ -58,6 +59,7 @@ void GraphicManager::runGraphic()
 		_topView->drawAllContent();
 		_frontView->drawAllContent();
 		_textBase->drawAllContent();
+		_forklift->drawAllContent();
 		//wyswietlanie
 		_window->display();
 	}
@@ -101,6 +103,7 @@ string GraphicManager::getStringFromUser()
 		_topView->drawAllContent();
 		_frontView->drawAllContent();
 		_textBase->drawAllContent();
+
 		//wyswietlanie
 		_window->display();
 	}

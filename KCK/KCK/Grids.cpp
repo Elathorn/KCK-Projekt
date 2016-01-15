@@ -1,7 +1,6 @@
 #include "Grids.h"
 #include "TextureManager.h"
-
-#define GRID_TO_WINDOW_RATIO 45
+#include "GraphicsConfig.h"
 #define SHELF_SCALE_RATIO 0.1
 
 Grid::Grid()

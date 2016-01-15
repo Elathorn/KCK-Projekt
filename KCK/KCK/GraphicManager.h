@@ -6,6 +6,7 @@
 #include "TopView.h"
 #include "TextView.h"
 #include "FrontView.h"
+#include "Forklift.h"
 
 extern ScriptInterpreter * SI;
 
@@ -29,6 +30,7 @@ private:
 	TopView* _topView;
 	FrontView* _frontView;
 	TextBase* _textBase;
+	Forklift* _forklift;
 	void createWindow(int Xsize, int Ysize);
 
 	

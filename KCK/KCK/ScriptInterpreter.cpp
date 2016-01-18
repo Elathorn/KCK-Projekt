@@ -6,30 +6,6 @@ extern ScriptInterpreter * SI;
 extern GraphicManager * GM;
 extern Mechanic * mechanic;
 
-string strReplace(string str, string formatSpec, string replace)
-{
-    size_t pos;
-    pos = str.find(formatSpec);
-    str.replace(pos, formatSpec.length(), replace);
-    return str;
-}
-/*
-string strReplace(string str, string formatSpec, string replace) 
-{
-    //przygotowanie buffora na ktorym bedziemy dzialac
-    const int bufforSize = str.length() + replace.length() - formatSpec.length();
-    char * buff = new char[bufforSize];
-    std::copy(str.begin(), str.end(), buff);
-    buff[str.size()] = '\0';
-
-    //aktualna podmiana
-    sprintf(buff, buff, replace);
-
-    //wracamy do C++ stringa
-    str = buff;
-    return str;
-}*/
-
 ScriptInterpreter::ScriptInterpreter()
 {
 	mechanic = new Mechanic(); //tworzenie mechaniki
@@ -41,8 +17,6 @@ ScriptInterpreter::ScriptInterpreter()
 	_goOrderDoneTxt = IOManager::loadVectorFromFile("goOrderDone.txt");
 	_rackNotFoundTxt = IOManager::loadVectorFromFile("rackNotFound.txt");
 	_objectIsActuallyHereTxt = IOManager::loadVectorFromFile("objectIsActuallyHere.txt");
-    _whatResponseEmptyTxt = IOManager::loadVectorFromFile("whatResponseEmpty.txt");
-    _whatResponseFullTxt = IOManager::loadVectorFromFile("whatResponseFull.txt");
 	srand(time(NULL));
 }
 
@@ -72,31 +46,13 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 			return randomizeAnswer(shelfIsFull);
 		else  //inaczej jesli sie udalo
 			return randomizeAnswer(goOrderDone);
+
 	}
-    else if (script->at(order) == "what")
-    {
-        checkValidation(adjToShelf, script);
-        Shelf* shelf = mechanic->findShelf(script->at(adjToShelf)); //znajdujemy polke na ktorej mamy dzialac
-        string rp[3]; //trzy skladowe odpowiedzi
-        for (int i = 0; i < 3; i++)
-        {
-            MovableObject * obj;
-            if ((obj = shelf->getShelf(i)) == NULL)
-                rp[i] = strReplace(randomizeAnswer(WhatResponseEmpty), "%s", shelf->getShelfName(i));
-            else
-            {
-                rp[i] = strReplace(randomizeAnswer(WhatResponseFull), "%s", shelf->getShelfName(i));
-                rp[i] = strReplace(rp[i], "%o", obj->getColorPL());
-            }
-        }
-        return rp[0] + rp[1] + rp[2];
-    }
 	//else if (script->at[order] == "")
 
 	//nie powinno sie nigdy zdarzyc, ale strzezonego...
 	delete script;
 	return randomizeAnswer(commandNotUnderstanded);
-
 }
 
 void ScriptInterpreter::checkValidation(int enumSum, vector<string> * script)
@@ -155,8 +111,6 @@ string ScriptInterpreter::randomizeAnswer(int enumInt)
 	case (goOrderDone) : return _goOrderDoneTxt->at(randomNumber(_goOrderDoneTxt->size())); break;
 	case (rackNotFound) : return _rackNotFoundTxt->at(randomNumber(_rackNotFoundTxt->size())); break;
 	case (objectIsActuallyHere) : return _objectIsActuallyHereTxt->at(randomNumber(_objectIsActuallyHereTxt->size())); break;
-    case (WhatResponseEmpty) : return _whatResponseEmptyTxt->at(randomNumber(_whatResponseEmptyTxt->size())); break;
-    case (WhatResponseFull) : return _whatResponseFullTxt->at(randomNumber(_whatResponseFullTxt->size())); break;
 	}
 
 }

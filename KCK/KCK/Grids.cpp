@@ -60,27 +60,6 @@ MovableObject* Shelf::getShelf(char shelfPos)
 	}
 }
 
-MovableObject * Shelf::getShelf(int enumInt)
-{
-    switch (enumInt)
-    {
-    case (TOP) : return getTopShelf(); 
-    case (MID) : return getMidShelf();
-    case (BOT) : return getBotShelf();
-    default: return nullptr; //nie powinno sie zdarzyc
-    }
-}
-
-string Shelf::getShelfName(int pos)
-{
-    switch (pos)
-    {
-    case (TOP) : return "gornej";
-    case (MID) : return "srodkowej";
-    case (BOT) : return "dolnej";
-    }
-}
-
 void Shelf::setShelf(MovableObject * newObj, char pos)
 {
 	switch (pos)

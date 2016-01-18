@@ -32,9 +32,6 @@ public:
 	MovableObject* getMidShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
 	MovableObject* getBotShelf(); //zwraca zawartoœæ danej pó³ki, w wypadku jej braku zwraca nullpointera
 	MovableObject* getShelf(char); //zwraca zawartoœæ wybranej pó³ki
-    MovableObject* getShelf(int);
-    string getShelfName(int);
-
 	void setSprite(sf::Sprite * newSprite) { _sprite = newSprite; }
 	sf::Sprite* getSprite() { return _sprite; }
 
@@ -57,7 +54,6 @@ public:
 	static const char MID_SHELF = 'm';
 	static const char BOT_SHELF = 'b';
 	static const char NO_SHELF = 'n';
-    static const enum LVL_ENUM { TOP, MID, BOT };
 private:
 	sf::Sprite * _sprite = NULL;
 	MovableObject* _topShelf;

@@ -13,8 +13,6 @@ public:
 	sf::Sprite* getSprite() { return _sprite; }
 	string getSize() { return _size; }
 	string getColor() { return _color; }
-    string getColorPL();
-
 	int getLocationXAxis() { return _locationXAxis; }
 	int getLocationYAxis() { return _locationYAxis; }
 

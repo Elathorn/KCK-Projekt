@@ -18,24 +18,6 @@ MovableObject::~MovableObject()
 {
 }
 
-string MovableObject::getColorPL()
-{
-    string colorStr = this->getColor();
-    if (colorStr == "red")
-        return "czerwone";
-    else if (colorStr == "blue")
-        return "niebieskie";
-    else if (colorStr == "yellow")
-        return "zolte";
-    else if (colorStr == "black")
-        return "czarne";
-    else if (colorStr == "white")
-        return "biale";
-    else if (colorStr == "green")
-        return "zielone";
-    return "niemozliwe, getColorPL error"; //nie powinno sie nigdy zdarzyc
-}
-
 int MovableObject::move(int newX, int newY)
 {
 	if (newX != -1)

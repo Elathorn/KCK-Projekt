@@ -1,0 +1,3 @@
+Na %s polce znajduje sie %o paczka. 
+Widze %o paczke na %s polce. 
+To %o paczka na %s polce! 

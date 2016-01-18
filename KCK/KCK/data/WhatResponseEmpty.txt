@@ -1,0 +1,5 @@
+Na polce %s nie ma zadnego pudelka. 
+Na %s polce nic nie znalezlem. 
+Nie znalazlem nic na %s polce. 
+Na %s polce nic nie ma. 
+Nic nie znajduje sie na %s polce. 

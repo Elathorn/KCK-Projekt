@@ -23,7 +23,9 @@ public:
 
 	void run(); //sluzy do uruchomienia interpretacji jako watek
 
-	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, goOrderDone, commandNotUnderstanded, rackNotFound, objectIsActuallyHere };
+	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, 
+                    goOrderDone, commandNotUnderstanded, rackNotFound, 
+                objectIsActuallyHere, WhatResponseFull, WhatResponseEmpty };
 private:
 	vector<string>* _script;
 	vector<string>* _shelfNotFoundTxt;
@@ -33,9 +35,11 @@ private:
 	vector<string>* _goOrderDoneTxt;
 	vector<string>* _rackNotFoundTxt;
 	vector<string>* _objectIsActuallyHereTxt;
-
+    vector<string>* _whatResponseEmptyTxt;
+    vector<string>* _whatResponseFullTxt;
 
 	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject};
+
 
 private:
 	//answer randomize

@@ -14,7 +14,7 @@ public:
 	void modifyTextByChar (char charToAdd);
 	string getLastLine();
 private:
-	static const int TEXT_LINES = 5; //okresla iloœæ linii tekstu w programie
+	static const int TEXT_LINES = 8; //okresla iloœæ linii tekstu w programie
 	const int FONT_SIZE = 100/TEXT_LINES;
 	static const int UNICODE_BACKSPACE_CODE = 8;
 	Text * _text[TEXT_LINES];

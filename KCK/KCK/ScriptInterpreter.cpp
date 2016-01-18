@@ -89,6 +89,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
                 rp[i] = strReplace(rp[i], "%o", obj->getColorPL());
             }
         }
+        delete script;
         return rp[0] + rp[1] + rp[2];
     }
 	//else if (script->at[order] == "")

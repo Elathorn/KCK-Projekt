@@ -35,8 +35,11 @@ void TopView::executeEvent(Vector2f& mouse, Event& event)
 			sprite->setColor(Color(200, 200, 200, 200));
 			_FV->setActualShelf(*it); //zmieniamy aktualnie wyswietlana polke
 		}
-		else
-			sprite->setColor(Color(255, 255, 255, 255)); //w innym wypadku
+		else if (*it == _FV->getActualShelf())
+		{
+			sprite->setColor(Color(200, 200, 200, 200));
+		}
+		else sprite->setColor(Color(255, 255, 255, 255)); //w innym wypadku
 	}
 	return;
 }

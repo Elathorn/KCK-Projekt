@@ -17,6 +17,7 @@ public:
 	void executeEvent(Vector2f& mouse, Event& event);
 
 	void setActualShelf(Shelf* sh) { _actShelf = sh; }
+	Shelf* getActualShelf() { return _actShelf; }
 	
 private:
 	void _drawMovableObjects();

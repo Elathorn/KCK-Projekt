@@ -45,9 +45,9 @@ private:
 
 	/*Sprawdza czy wszystkie potrzebne elementy sa juz w vectorze script
 	Przykladowy sposob uzycia:
-	checkValide(order + adjToShelf, script) - sprawdza czy script posiada pozycje order oraz adjToShelf
+	checkValidation(order + adjToShelf, script) - sprawdza czy script posiada pozycje order oraz adjToShelf
 	Jesli nie posiada, wczytuje je od usera
 	*/
-	void checkValide(int enumSum, vector<string> * script);
+	void checkValidation(int enumSum, vector<string> * script);
 };
 

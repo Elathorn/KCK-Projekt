@@ -31,10 +31,10 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 
 	//sprawdzenie istnienia rozkazu
 	if (script->at(order) == "")
-		checkValide(order, script);
+		checkValidation(order, script);
 	if (script->at(order) == "go")
 	{
-		checkValide(colorOfMovableObject + lvlOfShelf + adjToShelf, script); //WALIDACJA POTRZEBNYCH DANYCH
+		checkValidation(colorOfMovableObject + lvlOfShelf + adjToShelf, script); //WALIDACJA POTRZEBNYCH DANYCH
 		Shelf* shelf = mechanic->findShelf(script->at(adjToShelf));
 		MovableObject* obj = obj = mechanic->findMovableObject(script->at(colorOfMovableObject));
 		char lvlOfShelfChar = script->at(lvlOfShelf)[0];
@@ -55,7 +55,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 	return randomizeAnswer(commandNotUnderstanded);
 }
 
-void ScriptInterpreter::checkValide(int enumSum, vector<string> * script)
+void ScriptInterpreter::checkValidation(int enumSum, vector<string> * script)
 {
 		if (enumSum - colorOfMovableObject >= 0) //jesli roznica jest wieksza od zera
 		{ //nalezy zwalidowac kolor obiektu

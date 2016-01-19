@@ -22,17 +22,17 @@ string MovableObject::getColorPL()
 {
     string colorStr = this->getColor();
     if (colorStr == "red")
-        return "czerwone";
+        return "czerwona";
     else if (colorStr == "blue")
-        return "niebieskie";
+        return "niebieska";
     else if (colorStr == "yellow")
-        return "zolte";
+        return "zolta";
     else if (colorStr == "black")
-        return "czarne";
+        return "czarna";
     else if (colorStr == "white")
-        return "biale";
+        return "biala";
     else if (colorStr == "green")
-        return "zielone";
+        return "zielona";
     return "niemozliwe, getColorPL error"; //nie powinno sie nigdy zdarzyc
 }
 

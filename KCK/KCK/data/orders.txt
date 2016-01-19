@@ -8,3 +8,10 @@ zabierz;go
 zanies;go
 co;what
 jakie;what
+czesc;hi
+hej;hi
+siema;hi
+dzien;hi
+bry;hi
+fajrant;end
+koniec;end

@@ -25,7 +25,7 @@ public:
 
 	enum _typeOfAnswerChoice { shelfNotFound, movableObjNotFound, shelfIsFull, 
                     goOrderDone, commandNotUnderstanded, rackNotFound, 
-                objectIsActuallyHere, WhatResponseFull, WhatResponseEmpty };
+                objectIsActuallyHere, WhatResponseFull, WhatResponseEmpty, HiResponse, End };
 private:
 	vector<string>* _script;
 	vector<string>* _shelfNotFoundTxt;
@@ -37,6 +37,8 @@ private:
 	vector<string>* _objectIsActuallyHereTxt;
     vector<string>* _whatResponseEmptyTxt;
     vector<string>* _whatResponseFullTxt;
+    vector<string>* _hiResponseTxt;
+    vector<string>* _endTxt;
 
 	enum scriptPart { order, adjToShelf, lvlOfShelf, colorOfMovableObject, sizeOfMovableObject};
 

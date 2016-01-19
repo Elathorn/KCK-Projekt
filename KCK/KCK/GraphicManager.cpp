@@ -109,6 +109,21 @@ string GraphicManager::getStringFromUser()
 	}
 }
 
+void GraphicManager::stopGraphic(int time)
+{
+    //czyszczenie
+    _window->clear();
+    //rysowanie
+    _topView->drawAllContent();
+    _frontView->drawAllContent();
+    _textBase->drawAllContent();
+    _forklift->drawAllContent();
+    //wyswietlanie
+    _window->display();
+    sleep(seconds(time));
+    exit(0);
+}
+
 void GraphicManager::createWindow(int Xsize, int Ysize)
 {
 	_window = new RenderWindow(VideoMode(Xsize, Ysize), "KCK");

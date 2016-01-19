@@ -43,6 +43,8 @@ ScriptInterpreter::ScriptInterpreter()
 	_objectIsActuallyHereTxt = IOManager::loadVectorFromFile("objectIsActuallyHere.txt");
     _whatResponseEmptyTxt = IOManager::loadVectorFromFile("whatResponseEmpty.txt");
     _whatResponseFullTxt = IOManager::loadVectorFromFile("whatResponseFull.txt");
+    _hiResponseTxt = IOManager::loadVectorFromFile("hiResponse.txt");
+    _endTxt = IOManager::loadVectorFromFile("end.txt");
 	srand(time(NULL));
 }
 
@@ -72,8 +74,7 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
 			return randomizeAnswer(shelfIsFull);
 		else  //inaczej jesli sie udalo
 			return randomizeAnswer(goOrderDone);
-	}
-    else if (script->at(order) == "what")
+	} else if (script->at(order) == "what")
     {
         checkValidation(adjToShelf, script);
         Shelf* shelf = mechanic->findShelf(script->at(adjToShelf)); //znajdujemy polke na ktorej mamy dzialac
@@ -91,6 +92,16 @@ string ScriptInterpreter::interpretUserInput(string humanInput)
         }
         delete script;
         return rp[0] + rp[1] + rp[2];
+    } else if (script->at(order) == "hi")
+    {
+        delete script;
+        return randomizeAnswer(HiResponse);
+    } else if (script->at(order) == "end")
+    {
+        delete script;
+        GM->printCommunicate(randomizeAnswer(End));
+        GM->stopGraphic(5);
+       // return "";
     }
 	//else if (script->at[order] == "")
 
@@ -158,6 +169,8 @@ string ScriptInterpreter::randomizeAnswer(int enumInt)
 	case (objectIsActuallyHere) : return _objectIsActuallyHereTxt->at(randomNumber(_objectIsActuallyHereTxt->size())); break;
     case (WhatResponseEmpty) : return _whatResponseEmptyTxt->at(randomNumber(_whatResponseEmptyTxt->size())); break;
     case (WhatResponseFull) : return _whatResponseFullTxt->at(randomNumber(_whatResponseFullTxt->size())); break;
+    case (HiResponse) : return _hiResponseTxt->at(randomNumber(_hiResponseTxt->size())); break;
+    case(End) : return _endTxt->at(randomNumber(_endTxt->size()));
 	}
 
 }

@@ -22,7 +22,7 @@ public:
 	void runGraphic(); //todo: grafika, lul
 	void printCommunicate(string communicat);
 	string getStringFromUser();
-
+    void stopGraphic(int time);
 	
 
 private:

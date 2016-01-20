@@ -44,7 +44,26 @@ void GraphicManager::runGraphic()
 				{
 					_textBase->modifyTextByChar(event.text.unicode);
 				}
+
 			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) // Moving Up
+			{
+				_forklift->_sprite->move(0, _forklift->FORKLIFT_MOVEMENT_SPEED); // Move the sprite
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) // Moving Down
+			{
+				_forklift->_sprite->move(0, _forklift->FORKLIFT_MOVEMENT_SPEED); // Move the sprite
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) // Moving Left
+			{
+				_forklift->_sprite->move(0, _forklift->FORKLIFT_MOVEMENT_SPEED); // Move the sprite
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) // Moving Right
+			{
+				_forklift->_sprite->move(0, _forklift->FORKLIFT_MOVEMENT_SPEED); // Move the sprite
+			}
+
 			if (mouse.x < BORDER_VIEWS_X_AXIS)
 				_topView->executeEvent(mouse, event);
 			else

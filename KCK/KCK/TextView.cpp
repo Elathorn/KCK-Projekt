@@ -7,7 +7,7 @@ TextBase::TextBase(RenderWindow & window, int borderXAxis) : _window(window)
 	{
 		_text[i] = new Text();
 		_text[i]->setFont(*_font);
-		_text[i]->setPosition(0, borderXAxis + (FONT_SIZE * 1.5 * i));
+		_text[i]->setPosition(0, borderXAxis + (FONT_SIZE * 1.7 * i));
 		if (i==TEXT_LINES-1) 
 		{
 			_text[i]->setColor(sf::Color::Red);

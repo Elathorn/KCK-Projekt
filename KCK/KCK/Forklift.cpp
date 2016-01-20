@@ -1,5 +1,4 @@
 #include "Forklift.h"
-
 #include "TextureManager.h"
 #include "Mechanic.h"
 

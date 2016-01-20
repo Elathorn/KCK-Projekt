@@ -23,6 +23,7 @@ public:
 	void printCommunicate(string communicat);
 	string getStringFromUser();
     void stopGraphic(int time);
+	Forklift* _forklift;
 	
 
 private:
@@ -30,7 +31,7 @@ private:
 	TopView* _topView;
 	FrontView* _frontView;
 	TextBase* _textBase;
-	Forklift* _forklift;
+	
 	void createWindow(int Xsize, int Ysize);
 
 	

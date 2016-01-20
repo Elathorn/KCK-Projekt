@@ -11,7 +11,7 @@ TextBase::TextBase(RenderWindow & window, int borderXAxis) : _window(window)
 		if (i==TEXT_LINES-1) 
 		{
 			_text[i]->setColor(sf::Color::Red);
-			_text[i]->setString("");
+			_text[i]->setString("Przenies niebieska paczke na srodkowa wschodnia polke");
 		}
 		else
 		{

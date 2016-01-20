@@ -1,6 +1,6 @@
 #include "Mechanic.h"
-
-
+#include "GraphicManager.h"
+extern GraphicManager * GM;
 
 Mechanic::Mechanic()
 {
@@ -48,6 +48,8 @@ MovableObject * Mechanic::findMovableObject(string color)
 Shelf * Mechanic::findShelf(string locationStr)
 {
 	int locationX, locationY;
+	if( GM != NULL)
+		GM->_forklift->prepareDataForAnimation(locationStr);
 	if (locationStr == "north") //jeœli lokalizacja to pó³noc
 	{
 		locationY = 0; //to ustawiamy jej wartoœæ

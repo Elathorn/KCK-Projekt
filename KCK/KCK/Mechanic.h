@@ -4,6 +4,7 @@
 #include "Logger.h"
 #include <vector>
 #include "TextureManager.h"
+
 using namespace std;
 
 class Mechanic

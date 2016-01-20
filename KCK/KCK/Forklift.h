@@ -14,9 +14,11 @@ public:
 	sf::Sprite * getSprite() { return _sprite; }
 	void drawAllContent();
 	sf::Sprite * _sprite;
+	sf::Vector2f _animationVector;
+	void prepareDataForAnimation(string endPos);
 
 private:
-	
+	int _animationIterator = 0;
 	sf::Vector2i _coord;
 	sf::RenderWindow& _window;
 	TextureManager * _TM;
